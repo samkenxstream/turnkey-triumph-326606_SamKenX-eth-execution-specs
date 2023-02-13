@@ -1,10 +1,7 @@
-:mod:`ethereum.tangerine_whistle.utils.address`
-===============================================
-
 .. py:module:: ethereum.tangerine_whistle.utils.address
 
-Tangerine Whistle Utility Functions For Addresses
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For Addresses
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -16,6 +13,8 @@ Introduction
 Address specific functions used in this tangerine whistle version of
 specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

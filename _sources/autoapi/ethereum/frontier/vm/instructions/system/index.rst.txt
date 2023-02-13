@@ -1,6 +1,3 @@
-:mod:`ethereum.frontier.vm.instructions.system`
-===============================================
-
 .. py:module:: ethereum.frontier.vm.instructions.system
 
 Ethereum Virtual Machine (EVM) System Instructions
@@ -16,6 +13,8 @@ Introduction
 Implementations of the EVM system related instructions.
 
 
+.. only:: stage1
+
 Module Contents
 ---------------
 
@@ -28,6 +27,7 @@ Functions
 
    ethereum.frontier.vm.instructions.system.create
    ethereum.frontier.vm.instructions.system.return_
+   ethereum.frontier.vm.instructions.system.generic_call
    ethereum.frontier.vm.instructions.system.call
    ethereum.frontier.vm.instructions.system.callcode
    ethereum.frontier.vm.instructions.system.selfdestruct
@@ -72,6 +72,22 @@ return_
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/system.py
    :language: python
    :pyobject: return_
+
+generic_call
+~~~~~~~~~~~~
+
+
+.. function:: generic_call(evm: ethereum.frontier.vm.Evm, gas: ethereum.base_types.Uint, value: ethereum.base_types.U256, caller: ethereum.frontier.eth_types.Address, to: ethereum.frontier.eth_types.Address, code_address: ethereum.frontier.eth_types.Address, memory_input_start_position: ethereum.base_types.U256, memory_input_size: ethereum.base_types.U256, memory_output_start_position: ethereum.base_types.U256, memory_output_size: ethereum.base_types.U256) -> None
+   :noindexentry:
+
+   Perform the core logic of the `CALL*` family of opcodes.
+
+
+
+
+.. undocinclude:: /../src/ethereum/frontier/vm/instructions/system.py
+   :language: python
+   :pyobject: generic_call
 
 call
 ~~~~

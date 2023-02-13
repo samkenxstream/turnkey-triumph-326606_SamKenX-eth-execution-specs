@@ -1,6 +1,3 @@
-:mod:`ethereum.tangerine_whistle.state`
-=======================================
-
 .. py:module:: ethereum.tangerine_whistle.state
 
 State
@@ -20,6 +17,8 @@ It consists of a main account trie and storage tries for each contract.
 There is a distinction between an account that does not exist and
 `EMPTY_ACCOUNT`.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -79,21 +78,21 @@ Contains all information that is preserved between transactions.
    
 
    .. py:attribute:: _main_trie
-      :annotation: :ethereum.tangerine_whistle.trie.Trie[ethereum.tangerine_whistle.eth_types.Address, Optional[ethereum.tangerine_whistle.eth_types.Account]]
+         :annotation: :ethereum.tangerine_whistle.trie.Trie[ethereum.tangerine_whistle.eth_types.Address, Optional[ethereum.tangerine_whistle.eth_types.Account]]
 
       
 
    
 
    .. py:attribute:: _storage_tries
-      :annotation: :Dict[ethereum.tangerine_whistle.eth_types.Address, ethereum.tangerine_whistle.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]
+         :annotation: :Dict[ethereum.tangerine_whistle.eth_types.Address, ethereum.tangerine_whistle.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]
 
       
 
    
 
    .. py:attribute:: _snapshots
-      :annotation: :List[Tuple[ethereum.tangerine_whistle.trie.Trie[ethereum.tangerine_whistle.eth_types.Address, Optional[ethereum.tangerine_whistle.eth_types.Account]], Dict[ethereum.tangerine_whistle.eth_types.Address, ethereum.tangerine_whistle.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]]]
+         :annotation: :List[Tuple[ethereum.tangerine_whistle.trie.Trie[ethereum.tangerine_whistle.eth_types.Address, Optional[ethereum.tangerine_whistle.eth_types.Account]], Dict[ethereum.tangerine_whistle.eth_types.Address, ethereum.tangerine_whistle.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]]]
 
       
 

@@ -1,6 +1,3 @@
-:mod:`ethereum.utils.ensure`
-============================
-
 .. py:module:: ethereum.utils.ensure
 
 Ensure (Assertion) Utilities
@@ -15,6 +12,8 @@ Introduction
 
 Functions that simplify checking assertions and raising exceptions.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

@@ -1,10 +1,7 @@
-:mod:`ethereum.dao_fork.utils.message`
-======================================
-
 .. py:module:: ethereum.dao_fork.utils.message
 
-Dao Fork Utility Functions For The Message Data-structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For The Message Data-structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -15,6 +12,8 @@ Introduction
 
 Message specific functions used in this Dao Fork version of specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

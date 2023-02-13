@@ -1,6 +1,3 @@
-:mod:`ethereum.spurious_dragon.vm.precompiled_contracts`
-========================================================
-
 .. py:module:: ethereum.spurious_dragon.vm.precompiled_contracts
 
 Precompiled Contract Addresses
@@ -17,16 +14,77 @@ Addresses of precompiled contracts and mappings to their
 implementations.
 
 
-Submodules
-----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
+.. only:: stage1
 
-   ecrecover/index.rst
-   identity/index.rst
-   mapping/index.rst
-   ripemd160/index.rst
-   sha256/index.rst
+   Submodules
+   ----------
+   .. toctree::
+      :titlesonly:
+      :maxdepth: 1
 
+      ecrecover/index.rst
+      identity/index.rst
+      mapping/index.rst
+      ripemd160/index.rst
+      sha256/index.rst
+
+
+Package Contents
+----------------
+
+
+ECRECOVER_ADDRESS
+~~~~~~~~~~~~~~~~~
+
+
+
+.. py:data:: ECRECOVER_ADDRESS
+   
+   
+
+.. undocinclude:: /../src/ethereum/spurious_dragon/vm/precompiled_contracts/__init__.py
+   :language: python
+   :lines: 25-25
+
+
+SHA256_ADDRESS
+~~~~~~~~~~~~~~
+
+
+
+.. py:data:: SHA256_ADDRESS
+   
+   
+
+.. undocinclude:: /../src/ethereum/spurious_dragon/vm/precompiled_contracts/__init__.py
+   :language: python
+   :lines: 26-26
+
+
+RIPEMD160_ADDRESS
+~~~~~~~~~~~~~~~~~
+
+
+
+.. py:data:: RIPEMD160_ADDRESS
+   
+   
+
+.. undocinclude:: /../src/ethereum/spurious_dragon/vm/precompiled_contracts/__init__.py
+   :language: python
+   :lines: 27-27
+
+
+IDENTITY_ADDRESS
+~~~~~~~~~~~~~~~~
+
+
+
+.. py:data:: IDENTITY_ADDRESS
+   
+   
+
+.. undocinclude:: /../src/ethereum/spurious_dragon/vm/precompiled_contracts/__init__.py
+   :language: python
+   :lines: 28-28
 

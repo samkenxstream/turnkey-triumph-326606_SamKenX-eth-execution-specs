@@ -1,6 +1,3 @@
-:mod:`ethereum.utils.byte`
-==========================
-
 .. py:module:: ethereum.utils.byte
 
 Utility Functions For Byte Strings
@@ -15,6 +12,8 @@ Introduction
 
 Byte specific utility functions used in this specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

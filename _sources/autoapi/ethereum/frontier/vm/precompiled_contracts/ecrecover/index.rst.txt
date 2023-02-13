@@ -1,6 +1,3 @@
-:mod:`ethereum.frontier.vm.precompiled_contracts.ecrecover`
-===========================================================
-
 .. py:module:: ethereum.frontier.vm.precompiled_contracts.ecrecover
 
 Ethereum Virtual Machine (EVM) ECRECOVER PRECOMPILED CONTRACT
@@ -15,6 +12,8 @@ Introduction
 
 Implementation of the ECRECOVER precompiled contract.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

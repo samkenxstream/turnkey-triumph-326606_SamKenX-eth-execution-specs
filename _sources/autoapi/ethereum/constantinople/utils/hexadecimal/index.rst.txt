@@ -1,6 +1,3 @@
-:mod:`ethereum.constantinople.utils.hexadecimal`
-================================================
-
 .. py:module:: ethereum.constantinople.utils.hexadecimal
 
 Utility Functions For Hexadecimal Strings
@@ -16,6 +13,8 @@ Introduction
 Hexadecimal utility functions used in this specification, specific to
 Constantinople types.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

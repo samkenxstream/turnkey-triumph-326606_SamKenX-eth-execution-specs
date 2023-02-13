@@ -1,6 +1,3 @@
-:mod:`ethereum.dao_fork.dao`
-============================
-
 .. py:module:: ethereum.dao_fork.dao
 
 Dao Fork
@@ -19,6 +16,8 @@ collection of accounts (The Dao and all its children) to a recovery contract.
 The recovery contract was previously created using normal contract deployment.
 
 
+.. only:: stage1
+
 Module Contents
 ---------------
 
@@ -29,7 +28,7 @@ DAO_ACCOUNTS
 
 
 .. py:data:: DAO_ACCOUNTS
-
+   
    
 
 .. undocinclude:: /../src/ethereum/dao_fork/dao.py
@@ -43,7 +42,7 @@ DAO_RECOVERY
 
 
 .. py:data:: DAO_RECOVERY
-
+   
    
 
 .. undocinclude:: /../src/ethereum/dao_fork/dao.py

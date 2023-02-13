@@ -1,11 +1,10 @@
-:mod:`ethereum.crypto.elliptic_curve`
-=====================================
-
 .. py:module:: ethereum.crypto.elliptic_curve
 
 Elliptic Curves
 ^^^^^^^^^^^^^^^
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -48,7 +47,7 @@ SECP256K1N
 
 
 .. py:data:: SECP256K1N
-
+   
    
 
 .. undocinclude:: /../src/ethereum/crypto/elliptic_curve.py
@@ -62,7 +61,7 @@ F
 
 
 .. py:data:: F
-
+   
    
 
 .. undocinclude:: /../src/ethereum/crypto/elliptic_curve.py
@@ -76,7 +75,7 @@ T
 
 
 .. py:data:: T
-
+   
    
 
 .. undocinclude:: /../src/ethereum/crypto/elliptic_curve.py
@@ -124,42 +123,42 @@ directly, but rather to be subclassed.
    
 
    .. py:attribute:: __slots__
-      :annotation: = ['x', 'y']
+         :annotation: = ['x', 'y']
 
       
 
    
 
    .. py:attribute:: FIELD
-      :annotation: :Type[F]
+         :annotation: :Type[F]
 
       
 
    
 
    .. py:attribute:: A
-      :annotation: :F
+         :annotation: :F
 
       
 
    
 
    .. py:attribute:: B
-      :annotation: :F
+         :annotation: :F
 
       
 
    
 
    .. py:attribute:: x
-      :annotation: :F
+         :annotation: :F
 
       
 
    
 
    .. py:attribute:: y
-      :annotation: :F
+         :annotation: :F
 
       
 

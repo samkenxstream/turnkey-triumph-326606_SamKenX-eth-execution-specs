@@ -13,3 +13,9 @@ Comparisons
    byzantium_constantinople.rst
    constantinople_istanbul.rst
    istanbul_muir_glacier.rst
+   muir_glacier_berlin.rst
+   berlin_london.rst
+   london_arrow_glacier.rst
+   arrow_glacier_gray_glacier.rst
+   gray_glacier_paris.rst
+   paris_shanghai.rst

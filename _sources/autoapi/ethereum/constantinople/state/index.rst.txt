@@ -1,6 +1,3 @@
-:mod:`ethereum.constantinople.state`
-====================================
-
 .. py:module:: ethereum.constantinople.state
 
 State
@@ -20,6 +17,8 @@ It consists of a main account trie and storage tries for each contract.
 There is a distinction between an account that does not exist and
 `EMPTY_ACCOUNT`.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -55,6 +54,8 @@ Functions
    ethereum.constantinople.state.account_exists
    ethereum.constantinople.state.account_has_code_or_nonce
    ethereum.constantinople.state.is_account_empty
+   ethereum.constantinople.state.account_exists_and_is_empty
+   ethereum.constantinople.state.is_account_alive
    ethereum.constantinople.state.modify_state
    ethereum.constantinople.state.move_ether
    ethereum.constantinople.state.set_account_balance
@@ -80,21 +81,21 @@ Contains all information that is preserved between transactions.
    
 
    .. py:attribute:: _main_trie
-      :annotation: :ethereum.constantinople.trie.Trie[ethereum.constantinople.eth_types.Address, Optional[ethereum.constantinople.eth_types.Account]]
+         :annotation: :ethereum.constantinople.trie.Trie[ethereum.constantinople.eth_types.Address, Optional[ethereum.constantinople.eth_types.Account]]
 
       
 
    
 
    .. py:attribute:: _storage_tries
-      :annotation: :Dict[ethereum.constantinople.eth_types.Address, ethereum.constantinople.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]
+         :annotation: :Dict[ethereum.constantinople.eth_types.Address, ethereum.constantinople.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]
 
       
 
    
 
    .. py:attribute:: _snapshots
-      :annotation: :List[Tuple[ethereum.constantinople.trie.Trie[ethereum.constantinople.eth_types.Address, Optional[ethereum.constantinople.eth_types.Account]], Dict[ethereum.constantinople.eth_types.Address, ethereum.constantinople.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]]]
+         :annotation: :List[Tuple[ethereum.constantinople.trie.Trie[ethereum.constantinople.eth_types.Address, Optional[ethereum.constantinople.eth_types.Account]], Dict[ethereum.constantinople.eth_types.Address, ethereum.constantinople.trie.Trie[ethereum.base_types.Bytes, ethereum.base_types.U256]]]]
 
       
 
@@ -464,6 +465,52 @@ is_account_empty
 .. undocinclude:: /../src/ethereum/constantinople/state.py
    :language: python
    :pyobject: is_account_empty
+
+account_exists_and_is_empty
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. function:: account_exists_and_is_empty(state: State, address: ethereum.constantinople.eth_types.Address) -> bool
+   :noindexentry:
+
+   Checks if an account exists and has zero nonce, empty code and zero
+   balance.
+
+   :param state: The state
+   :param address: Address of the account that needs to be checked.
+
+   :returns: **exists_and_is_empty** -- True if an account exists and has zero nonce, empty code and zero
+             balance, False otherwise.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/constantinople/state.py
+   :language: python
+   :pyobject: account_exists_and_is_empty
+
+is_account_alive
+~~~~~~~~~~~~~~~~
+
+
+.. function:: is_account_alive(state: State, address: ethereum.constantinople.eth_types.Address) -> bool
+   :noindexentry:
+
+   Check whether is an account is both in the state and non empty.
+
+   :param state: The state
+   :param address: Address of the account that needs to be checked.
+
+   :returns: **is_alive** -- True if the account is alive.
+   :rtype: `bool`
+
+
+
+
+.. undocinclude:: /../src/ethereum/constantinople/state.py
+   :language: python
+   :pyobject: is_account_alive
 
 modify_state
 ~~~~~~~~~~~~

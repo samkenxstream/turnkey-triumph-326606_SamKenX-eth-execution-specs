@@ -1,10 +1,7 @@
-:mod:`ethereum.homestead.utils.address`
-=======================================
-
 .. py:module:: ethereum.homestead.utils.address
 
-Homestead Utility Functions For Addresses
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For Addresses
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -15,6 +12,8 @@ Introduction
 
 Address specific functions used in this homestead version of specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

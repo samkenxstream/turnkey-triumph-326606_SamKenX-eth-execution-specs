@@ -1,10 +1,7 @@
-:mod:`ethereum.spurious_dragon.utils.message`
-=============================================
-
 .. py:module:: ethereum.spurious_dragon.utils.message
 
-Spurious Dragon Utility Functions For The Message Data-structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For The Message Data-structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -16,6 +13,8 @@ Introduction
 Message specific functions used in this spurious dragon version of
 specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

@@ -1,10 +1,7 @@
-:mod:`ethereum.homestead.utils.message`
-=======================================
-
 .. py:module:: ethereum.homestead.utils.message
 
-Homestead Utility Functions For The Message Data-structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For The Message Data-structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -15,6 +12,8 @@ Introduction
 
 Message specific functions used in this homestead version of specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

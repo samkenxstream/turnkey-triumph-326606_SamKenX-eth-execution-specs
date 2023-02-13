@@ -1,6 +1,3 @@
-:mod:`ethereum.utils.hexadecimal`
-=================================
-
 .. py:module:: ethereum.utils.hexadecimal
 
 Utility Functions For Hexadecimal Strings
@@ -15,6 +12,8 @@ Introduction
 
 Hexadecimal strings specific utility functions used in this specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -34,6 +33,7 @@ Functions
    ethereum.utils.hexadecimal.hex_to_bytes256
    ethereum.utils.hexadecimal.hex_to_hash
    ethereum.utils.hexadecimal.hex_to_uint
+   ethereum.utils.hexadecimal.hex_to_u64
    ethereum.utils.hexadecimal.hex_to_u256
 
 
@@ -209,6 +209,27 @@ hex_to_uint
 .. undocinclude:: /../src/ethereum/utils/hexadecimal.py
    :language: python
    :pyobject: hex_to_uint
+
+hex_to_u64
+~~~~~~~~~~
+
+
+.. function:: hex_to_u64(hex_string: str) -> ethereum.base_types.U64
+   :noindexentry:
+
+   Convert hex string to U64.
+
+   :param hex_string: The hexadecimal string to be converted to U256.
+
+   :returns: **converted** -- The U64 integer obtained from the given hexadecimal string.
+   :rtype: `U64`
+
+
+
+
+.. undocinclude:: /../src/ethereum/utils/hexadecimal.py
+   :language: python
+   :pyobject: hex_to_u64
 
 hex_to_u256
 ~~~~~~~~~~~

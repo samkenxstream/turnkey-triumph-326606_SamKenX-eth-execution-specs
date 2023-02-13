@@ -1,6 +1,3 @@
-:mod:`ethereum.dao_fork.vm.instructions.block`
-==============================================
-
 .. py:module:: ethereum.dao_fork.vm.instructions.block
 
 Ethereum Virtual Machine (EVM) Block Instructions
@@ -15,6 +12,8 @@ Introduction
 
 Implementations of the EVM block instructions.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -50,9 +49,6 @@ block_hash
 
    :param evm: The current EVM frame.
 
-   :raises ~ethereum.dao_fork.vm.exceptions.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `20`.
-
 
 
 
@@ -74,9 +70,6 @@ coinbase
    executing transaction/call resides.
 
    :param evm: The current EVM frame.
-
-   :raises ~ethereum.dao_fork.vm.exceptions.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -100,9 +93,6 @@ timestamp
 
    :param evm: The current EVM frame.
 
-   :raises ~ethereum.dao_fork.vm.exceptions.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
-
 
 
 
@@ -123,9 +113,6 @@ number
    executing transaction/call resides.
 
    :param evm: The current EVM frame.
-
-   :raises ~ethereum.dao_fork.vm.exceptions.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 
@@ -148,9 +135,6 @@ difficulty
 
    :param evm: The current EVM frame.
 
-   :raises ~ethereum.dao_fork.vm.exceptions.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
-
 
 
 
@@ -171,9 +155,6 @@ gas_limit
    executing transaction/call resides.
 
    :param evm: The current EVM frame.
-
-   :raises ~ethereum.dao_fork.vm.exceptions.StackOverflowError: If `len(stack)` is equal to `1024`.
-   :raises ~ethereum.dao_fork.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
 
 
 

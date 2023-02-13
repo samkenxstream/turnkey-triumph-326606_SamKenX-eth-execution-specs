@@ -1,10 +1,7 @@
-:mod:`ethereum.spurious_dragon.utils.address`
-=============================================
-
 .. py:module:: ethereum.spurious_dragon.utils.address
 
-Spurious Dragon Utility Functions For Addresses
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hardfork Utility Functions For Addresses
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
     :backlinks: none
@@ -16,6 +13,8 @@ Introduction
 Address specific functions used in this spurious dragon version of
 specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

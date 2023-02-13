@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ethereum.dao_fork.specethereum.tangerine_whistle.spec &mdash; Ethereum Specification  documentation</title>
+  <title>Ethereum Specification &mdash; Ethereum Specification  documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -18,11 +18,12 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/js/toggle_diffs.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="ethereum.dao_fork.utils.messageethereum.tangerine_whistle.utils.message" href="../utils/message/index.html" />
-    <link rel="prev" title="ethereum.dao_fork.vm.instructions.systemethereum.tangerine_whistle.vm.instructions.system" href="../vm/instructions/system/index.html" /> 
+    <link rel="next" title="Ethereum Virtual Machine (EVM) Gas" href="../vm/gas/index.html" />
+    <link rel="prev" title="Ethereum DaoTangerine Whistle Hardfork" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -33,6 +34,10 @@
     <a href="https://github.com/ethereum/execution-specs/">original source</a>.
 </div>
 
+
+<nav class="menu">
+    <button id="diff-toggle">Only Show Diffs</button>
+</nav>
 
 
  
@@ -57,9 +62,29 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/ethereum/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/index.html#ethereum-specification">Ethereum Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">Specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/ethereum/index.html">Ethereum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/frontier/index.html">Ethereum Frontier Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/homestead/index.html">Ethereum Homestead Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/dao_fork/index.html">Ethereum Dao Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/tangerine_whistle/index.html">Ethereum Tangerine Whistle Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/spurious_dragon/index.html">Ethereum Spurious Dragon Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/byzantium/index.html">Ethereum Byzantium Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/constantinople/index.html">Ethereum Constantinople Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/istanbul/index.html">Ethereum Istanbul Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/muir_glacier/index.html">Ethereum Muir Glacier Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/berlin/index.html">Ethereum Berlin Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/london/index.html">Ethereum London Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/arrow_glacier/index.html">Ethereum Arrow Glacier Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/gray_glacier/index.html">Ethereum Gray Glacier Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/paris/index.html">Ethereum Paris Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/shanghai/index.html">Ethereum Shanghai Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/crypto/index.html">Cryptographic Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/utils/index.html">Utility Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/base_types/index.html">Numeric &amp; Array Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/ethash/index.html">Ethash Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/exceptions/index.html">Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/ethereum/rlp/index.html">Recursive Length Prefix (RLP) Encoding</a></li>
 </ul>
 </li>
 </ul>
@@ -68,114 +93,163 @@
 <p class="caption"><span class="caption-text">Comparisons:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Comparisons</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../frontier_homestead.html">frontier → homestead</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/instructions/system/index.html">vm.instructions.system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/eth_types/index.html">eth_types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/utils/message/index.html">utils.message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/index.html">vm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/bloom/index.html">bloom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/interpreter/index.html">vm.interpreter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/trie/index.html">trie</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/genesis/index.html">genesis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/instructions/index.html">vm.instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../frontier_homestead.html">Frontier → Homestead</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/genesis/index.html">Genesis Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/index.html">Ethereum <span class="change-replaced">Frontier</span><span class="change-replacement">Homestead</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/trie/index.html">State Trie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/utils/message/index.html">Hardfork Utility Functions For The Message Data-structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frontier_homestead/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../homestead_dao_fork.html">homestead → dao_fork</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/utils/message/index.html">utils.message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/dao/index.html">dao</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/utils/index.html">utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/vm/precompiled_contracts/ecrecover/index.html">vm.precompiled_contracts.ecrecover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../homestead_dao_fork.html">Homestead → Dao Fork</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/dao/index.html">Dao Fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/index.html">Ethereum <span class="change-replaced">Homestead</span><span class="change-replacement">Dao</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../homestead_dao_fork/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../dao_fork_tangerine_whistle.html">dao_fork → tangerine_whistle</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../vm/instructions/system/index.html">vm.instructions.system</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/message/index.html">utils.message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dao/index.html">dao</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/index.html">utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../vm/gas/index.html">vm.gas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/hexadecimal/index.html">utils.hexadecimal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../vm/precompiled_contracts/ecrecover/index.html">vm.precompiled_contracts.ecrecover</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../dao_fork_tangerine_whistle.html">Dao Fork → Tangerine Whistle</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../dao/index.html">Dao Fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html">Ethereum <span class="change-replaced">Dao</span><span class="change-replacement">Tangerine Whistle</span> Hardfork</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon.html">tangerine_whistle → spurious_dragon</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/instructions/system/index.html">vm.instructions.system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/utils/message/index.html">utils.message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/index.html">vm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/interpreter/index.html">vm.interpreter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/utils/index.html">utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/state/index.html">state</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/gas/index.html">vm.gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon.html">Tangerine Whistle → Spurious Dragon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/index.html">Ethereum <span class="change-replaced">Tangerine Whistle</span><span class="change-replacement">Spurious Dragon</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/state/index.html">State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tangerine_whistle_spurious_dragon/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../spurious_dragon_byzantium.html">spurious_dragon → byzantium</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/system/index.html">vm.instructions.system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/eth_types/index.html">eth_types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/utils/message/index.html">utils.message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/log/index.html">vm.instructions.log</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/alt_bn128/index.html">vm.precompiled_contracts.alt_bn128</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/index.html">vm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/mapping/index.html">vm.precompiled_contracts.mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/index.html">vm.precompiled_contracts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/interpreter/index.html">vm.interpreter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/utils/index.html">utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/gas/index.html">vm.gas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/exceptions/index.html">vm.exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/modexp/index.html">vm.precompiled_contracts.modexp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/storage/index.html">vm.instructions.storage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/environment/index.html">vm.instructions.environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/index.html">vm.instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../spurious_dragon_byzantium.html">Spurious Dragon → Byzantium</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/index.html">Ethereum <span class="change-replaced">Spurious Dragon</span><span class="change-replacement">Byzantium</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/utils/message/index.html">Hardfork Utility Functions For The Message Data-structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/exceptions/index.html">Ethereum Virtual Machine (EVM) Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/environment/index.html">Ethereum Virtual Machine (EVM) Environmental Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/log/index.html">Ethereum Virtual Machine (EVM) Logging Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/storage/index.html">Ethereum Virtual Machine (EVM) Storage Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/alt_bn128/index.html">Ethereum Virtual Machine (EVM) ALT_BN128 CONTRACTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/index.html">Precompiled Contract Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/mapping/index.html">Precompiled Contract Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spurious_dragon_byzantium/vm/precompiled_contracts/modexp/index.html">Ethereum Virtual Machine (EVM) MODEXP PRECOMPILED CONTRACT</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../byzantium_constantinople.html">byzantium → constantinople</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/system/index.html">vm.instructions.system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/bitwise/index.html">vm.instructions.bitwise</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/interpreter/index.html">vm.interpreter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/gas/index.html">vm.gas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/precompiled_contracts/modexp/index.html">vm.precompiled_contracts.modexp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/environment/index.html">vm.instructions.environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/index.html">vm.instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../byzantium_constantinople.html">Byzantium → Constantinople</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/index.html">Ethereum <span class="change-replaced">Byzantium</span><span class="change-replacement">Constantinople</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/utils/address/index.html">Hardfork Utility Functions For Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/bitwise/index.html">Ethereum Virtual Machine (EVM) Bitwise Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/environment/index.html">Ethereum Virtual Machine (EVM) Environmental Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../byzantium_constantinople/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../constantinople_istanbul.html">constantinople → istanbul</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/alt_bn128/index.html">vm.precompiled_contracts.alt_bn128</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/index.html">vm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/block/index.html">vm.instructions.block</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/mapping/index.html">vm.precompiled_contracts.mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/interpreter/index.html">vm.interpreter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/exceptions/index.html">vm.exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/index.html">vm.instructions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/blake2f/index.html">vm.precompiled_contracts.blake2f</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/eth_types/index.html">eth_types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/utils/address/index.html">utils.address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/index.html">vm.precompiled_contracts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/index.html">__init__</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/state/index.html">state</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/gas/index.html">vm.gas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/storage/index.html">vm.instructions.storage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/environment/index.html">vm.instructions.environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../constantinople_istanbul.html">Constantinople → Istanbul</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/index.html">Ethereum <span class="change-replaced">Constantinople</span><span class="change-replacement">Istanbul</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/state/index.html">State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/utils/address/index.html">Hardfork Utility Functions For Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/exceptions/index.html">Ethereum Virtual Machine (EVM) Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/block/index.html">Ethereum Virtual Machine (EVM) Block Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/environment/index.html">Ethereum Virtual Machine (EVM) Environmental Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/instructions/storage/index.html">Ethereum Virtual Machine (EVM) Storage Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/alt_bn128/index.html">Ethereum Virtual Machine (EVM) ALT_BN128 CONTRACTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/blake2f/index.html">Ethereum Virtual Machine (EVM) Blake2 PRECOMPILED CONTRACT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/index.html">Precompiled Contract Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../constantinople_istanbul/vm/precompiled_contracts/mapping/index.html">Precompiled Contract Addresses</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../istanbul_muir_glacier.html">istanbul → muir_glacier</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../istanbul_muir_glacier/spec/index.html">spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../istanbul_muir_glacier/index.html">__init__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../istanbul_muir_glacier.html">Istanbul → Muir Glacier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../istanbul_muir_glacier/index.html">Ethereum <span class="change-replaced">Istanbul</span><span class="change-replacement">Muir Glacier</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../istanbul_muir_glacier/spec/index.html">Ethereum Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../muir_glacier_berlin.html">Muir Glacier → Berlin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/index.html">Ethereum <span class="change-replaced">Muir Glacier</span><span class="change-replacement">Berlin</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/trie/index.html">State Trie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/utils/message/index.html">Hardfork Utility Functions For The Message Data-structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/instructions/environment/index.html">Ethereum Virtual Machine (EVM) Environmental Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/instructions/storage/index.html">Ethereum Virtual Machine (EVM) Storage Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../muir_glacier_berlin/vm/precompiled_contracts/modexp/index.html">Ethereum Virtual Machine (EVM) MODEXP PRECOMPILED CONTRACT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../berlin_london.html">Berlin → London</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/index.html">Ethereum <span class="change-replaced">Berlin</span><span class="change-replacement">London</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/exceptions/index.html">Ethereum Virtual Machine (EVM) Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/instructions/environment/index.html">Ethereum Virtual Machine (EVM) Environmental Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../berlin_london/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../london_arrow_glacier.html">London → Arrow Glacier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../london_arrow_glacier/index.html">Ethereum <span class="change-replaced">London</span><span class="change-replacement">Arrow Glacier</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../london_arrow_glacier/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../london_arrow_glacier/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../arrow_glacier_gray_glacier.html">Arrow Glacier → Gray Glacier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../arrow_glacier_gray_glacier/index.html">Ethereum <span class="change-replaced">Arrow</span><span class="change-replacement">Gray</span> Glacier Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arrow_glacier_gray_glacier/spec/index.html">Ethereum Specification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../gray_glacier_paris.html">Gray Glacier → Paris</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/index.html">Ethereum <span class="change-replaced">Gray Glacier</span><span class="change-replacement">Paris</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/vm/index.html">Ethereum Virtual Machine (EVM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/vm/instructions/block/index.html">Ethereum Virtual Machine (EVM) Block Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gray_glacier_paris/vm/interpreter/index.html">Ethereum Virtual Machine (EVM) Interpreter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../paris_shanghai.html">Paris → Shanghai</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/eth_types/index.html">Ethereum Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/index.html">Ethereum <span class="change-replaced">Paris</span><span class="change-replacement">Shanghai</span> Hardfork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/spec/index.html">Ethereum Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/state/index.html">State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/trie/index.html">State Trie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/vm/gas/index.html">Ethereum Virtual Machine (EVM) Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/vm/instructions/index.html">EVM Instruction Encoding (Opcodes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/vm/instructions/stack/index.html">Ethereum Virtual Machine (EVM) Stack Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../paris_shanghai/vm/instructions/system/index.html">Ethereum Virtual Machine (EVM) System Instructions</a></li>
 </ul>
 </li>
 </ul>
@@ -197,8 +271,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Comparisons</a></li>
-          <li class="breadcrumb-item"><a href="../../dao_fork_tangerine_whistle.html">dao_fork → tangerine_whistle</a></li>
-      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.dao_fork.spec</span></code><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.tangerine_whistle.spec</span></code></li>
+          <li class="breadcrumb-item"><a href="../../dao_fork_tangerine_whistle.html">Dao Fork → Tangerine Whistle</a></li>
+      <li class="breadcrumb-item active">Ethereum Specification</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/diffs/dao_fork_tangerine_whistle/spec/index.pickle64.txt" rel="nofollow"> View page source</a>
       </li>
@@ -208,10 +282,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ethereum.dao_fork.spec">
-<span id="ethereum-dao-fork-spec"></span><h1><a class="change-replaced reference internal" href="#module-ethereum.dao_fork.spec" title="ethereum.dao_fork.spec"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.dao_fork.spec</span></code></a><a class="change-replacement reference internal" href="#module-ethereum.tangerine_whistle.spec" title="ethereum.tangerine_whistle.spec"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ethereum.tangerine_whistle.spec</span></code></a><a class="headerlink" href="#module-ethereum.dao_fork.spec" title="Permalink to this headline"></a></h1>
-<section id="ethereum-specification">
-<h2>Ethereum Specification<a class="headerlink" href="#ethereum-specification" title="Permalink to this headline"></a></h2>
+  <span class="target" id="module-ethereum.dao_fork.spec"></span><section id="ethereum-specification">
+<span id="dao-fork"></span><h1>Ethereum Specification<a class="headerlink" href="#ethereum-specification" title="Permalink to this headline"></a></h1>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
@@ -228,7 +300,7 @@
 <li><p><a class="reference internal" href="#block-reward" id="id7">BLOCK_REWARD</a></p></li>
 <li><p><a class="reference internal" href="#gas-limit-adjustment-factor" id="id8">GAS_LIMIT_ADJUSTMENT_FACTOR</a></p></li>
 <li><p><a class="reference internal" href="#gas-limit-minimum" id="id9">GAS_LIMIT_MINIMUM</a></p></li>
-<li><p><a class="reference internal" href="#genesis-difficulty" id="id10">GENESIS_DIFFICULTY</a></p></li>
+<li><p><a class="reference internal" href="#minimum-difficulty" id="id10">MINIMUM_DIFFICULTY</a></p></li>
 <li><p><a class="reference internal" href="#max-ommer-depth" id="id11">MAX_OMMER_DEPTH</a></p></li>
 <li><p><a class="reference internal" href="#blockchain" id="id12">BlockChain</a></p></li>
 <li><p><a class="reference internal" href="#apply-fork" id="id13">apply_fork</a></p></li>
@@ -253,13 +325,13 @@
 </ul>
 </div>
 <section id="introduction">
-<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h3>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>Entry point for the Ethereum specification.</p>
 </section>
 <section id="module-contents">
-<h3>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h3>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
 <section id="classes">
-<h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h4>
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h3>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -273,7 +345,7 @@
 </table>
 </section>
 <section id="functions">
-<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h4>
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -284,7 +356,7 @@
 <td><p>Transforms the state from the previous hard fork (<cite>old</cite>) into the block</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.get_last_256_block_hashes" title="ethereum.dao_fork.spec.get_last_256_block_hashes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_last_256_block_hashes</span></code></a></p></td>
-<td><p>Obtain the list of hashes of the previous 256 blocks in order of increasing</p></td>
+<td><p>Obtain the list of hashes of the previous 256 blocks in order of</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.state_transition" title="ethereum.dao_fork.spec.state_transition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_transition</span></code></a></p></td>
 <td><p>Attempts to apply a block to an existing block chain.</p></td>
@@ -314,7 +386,7 @@
 <td><p>Verifies a transaction.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.calculate_intrinsic_cost" title="ethereum.dao_fork.spec.calculate_intrinsic_cost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_intrinsic_cost</span></code></a></p></td>
-<td><p>Calculates the intrinsic cost of the transaction that is charged before</p></td>
+<td><p>Calculates the gas that is charged before execution is started.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.recover_sender" title="ethereum.dao_fork.spec.recover_sender"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recover_sender</span></code></a></p></td>
 <td><p>Extracts the sender address from a transaction.</p></td>
@@ -335,7 +407,7 @@
 </table>
 </section>
 <section id="attributes">
-<h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h4>
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -351,7 +423,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.GAS_LIMIT_MINIMUM" title="ethereum.dao_fork.spec.GAS_LIMIT_MINIMUM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GAS_LIMIT_MINIMUM</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.GENESIS_DIFFICULTY" title="ethereum.dao_fork.spec.GENESIS_DIFFICULTY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GENESIS_DIFFICULTY</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.MINIMUM_DIFFICULTY" title="ethereum.dao_fork.spec.MINIMUM_DIFFICULTY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MINIMUM_DIFFICULTY</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ethereum.dao_fork.spec.MAX_OMMER_DEPTH" title="ethereum.dao_fork.spec.MAX_OMMER_DEPTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_OMMER_DEPTH</span></code></a></p></td>
@@ -362,9 +434,9 @@
 </section>
 </section>
 <section id="module-details">
-<h3>Module Details<a class="headerlink" href="#module-details" title="Permalink to this headline"></a></h3>
+<h2>Module Details<a class="headerlink" href="#module-details" title="Permalink to this headline"></a></h2>
 <section id="block-reward">
-<h4>BLOCK_REWARD<a class="headerlink" href="#block-reward" title="Permalink to this headline"></a></h4>
+<h3>BLOCK_REWARD<a class="headerlink" href="#block-reward" title="Permalink to this headline"></a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.BLOCK_REWARD">
 <span class="sig-name descname"><span class="pre">BLOCK_REWARD</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.BLOCK_REWARD" title="Permalink to this definition"></a></dt>
@@ -375,7 +447,7 @@
 </div>
 </section>
 <section id="gas-limit-adjustment-factor">
-<h4>GAS_LIMIT_ADJUSTMENT_FACTOR<a class="headerlink" href="#gas-limit-adjustment-factor" title="Permalink to this headline"></a></h4>
+<h3>GAS_LIMIT_ADJUSTMENT_FACTOR<a class="headerlink" href="#gas-limit-adjustment-factor" title="Permalink to this headline"></a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.GAS_LIMIT_ADJUSTMENT_FACTOR">
 <span class="sig-name descname"><span class="pre">GAS_LIMIT_ADJUSTMENT_FACTOR</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.GAS_LIMIT_ADJUSTMENT_FACTOR" title="Permalink to this definition"></a></dt>
@@ -386,7 +458,7 @@
 </div>
 </section>
 <section id="gas-limit-minimum">
-<h4>GAS_LIMIT_MINIMUM<a class="headerlink" href="#gas-limit-minimum" title="Permalink to this headline"></a></h4>
+<h3>GAS_LIMIT_MINIMUM<a class="headerlink" href="#gas-limit-minimum" title="Permalink to this headline"></a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.GAS_LIMIT_MINIMUM">
 <span class="sig-name descname"><span class="pre">GAS_LIMIT_MINIMUM</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.GAS_LIMIT_MINIMUM" title="Permalink to this definition"></a></dt>
@@ -396,19 +468,19 @@
 </pre></div>
 </div>
 </section>
-<section id="genesis-difficulty">
-<h4>GENESIS_DIFFICULTY<a class="headerlink" href="#genesis-difficulty" title="Permalink to this headline"></a></h4>
+<section id="minimum-difficulty">
+<h3>MINIMUM_DIFFICULTY<a class="headerlink" href="#minimum-difficulty" title="Permalink to this headline"></a></h3>
 <dl class="py data">
-<dt class="sig sig-object py" id="ethereum.dao_fork.spec.GENESIS_DIFFICULTY">
-<span class="sig-name descname"><span class="pre">GENESIS_DIFFICULTY</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.GENESIS_DIFFICULTY" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ethereum.dao_fork.spec.MINIMUM_DIFFICULTY">
+<span class="sig-name descname"><span class="pre">MINIMUM_DIFFICULTY</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.MINIMUM_DIFFICULTY" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GENESIS_DIFFICULTY</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="mi">131072</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MINIMUM_DIFFICULTY</span> <span class="o">=</span> <span class="n">Uint</span><span class="p">(</span><span class="mi">131072</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="max-ommer-depth">
-<h4>MAX_OMMER_DEPTH<a class="headerlink" href="#max-ommer-depth" title="Permalink to this headline"></a></h4>
+<h3>MAX_OMMER_DEPTH<a class="headerlink" href="#max-ommer-depth" title="Permalink to this headline"></a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.MAX_OMMER_DEPTH">
 <span class="sig-name descname"><span class="pre">MAX_OMMER_DEPTH</span></span><a class="headerlink" href="#ethereum.dao_fork.spec.MAX_OMMER_DEPTH" title="Permalink to this definition"></a></dt>
@@ -419,7 +491,7 @@
 </div>
 </section>
 <section id="blockchain">
-<h4>BlockChain<a class="headerlink" href="#blockchain" title="Permalink to this headline"></a></h4>
+<h3>BlockChain<a class="headerlink" href="#blockchain" title="Permalink to this headline"></a></h3>
 <p>History and current state of the block chain.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.BlockChain">
@@ -436,19 +508,28 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.BlockChain.chain_id">
-<span class="sig-name descname"><span class="pre">chain_id</span></span><em class="property"> <span class="pre">:ethereum.base_types.Uint64</span></em><a class="headerlink" href="#ethereum.dao_fork.spec.BlockChain.chain_id" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">chain_id</span></span><em class="property"> <span class="pre">:ethereum.base_types.U64</span></em><a class="headerlink" href="#ethereum.dao_fork.spec.BlockChain.chain_id" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="apply-fork">
-<h4>apply_fork<a class="headerlink" href="#apply-fork" title="Permalink to this headline"></a></h4>
+<h3>apply_fork<a class="headerlink" href="#apply-fork" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.apply_fork">
 <span class="sig-name descname"><span class="pre">apply_fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.apply_fork" title="Permalink to this definition"></a></dt>
 <dd><p>Transforms the state from the previous hard fork (<cite>old</cite>) into the block
 chain object for this hard fork and returns it.</p>
+<p>When forks need to implement an irregular state transition, this function
+is used to handle the irregularity.<span class="change-added"> See the </span><a class="change-added reference internal" href="../../dao_fork/spec/index.pickle#dao-fork"><span class="std std-ref">DAO Fork</span></a><span class="change-added"> for
+an example.</span></p>
+<p class="change-removed">The DAO-Fork occured as a result of the <a class="reference external" href="https://www.gemini.com/cryptopedia/the-dao-hack-makerdao">2016 DAO Hacks</a> in which an
+unknown entity managed to drain more than 3.6 million ether causing the
+price of ether to drop by nearly 35%. This fork was the solution to the
+hacks and manually reset the affected parties’ accounts to their state
+prior to the attack. This fork essentially rewrote the history of the
+Ethereum network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>old</strong> – Previous block chain object.</p>
@@ -471,13 +552,15 @@ chain object for this hard fork and returns it.</p>
 </div>
 </section>
 <section id="get-last-256-block-hashes">
-<h4>get_last_256_block_hashes<a class="headerlink" href="#get-last-256-block-hashes" title="Permalink to this headline"></a></h4>
+<h3>get_last_256_block_hashes<a class="headerlink" href="#get-last-256-block-hashes" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.get_last_256_block_hashes">
 <span class="sig-name descname"><span class="pre">get_last_256_block_hashes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.get_last_256_block_hashes" title="Permalink to this definition"></a></dt>
-<dd><p>Obtain the list of hashes of the previous 256 blocks in order of increasing
-block number.</p>
+<dd><p>Obtain the list of hashes of the previous 256 blocks in order of
+increasing block number.</p>
 <p>This function will return less hashes for the first 256 blocks.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BLOCKHASH</span></code> opcode needs to access the latest hashes on the chain,
+therefore this function retrieves them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>chain</strong> – History and current state.</p>
@@ -514,11 +597,20 @@ block number.</p>
 </div>
 </section>
 <section id="state-transition">
-<h4>state_transition<a class="headerlink" href="#state-transition" title="Permalink to this headline"></a></h4>
+<h3>state_transition<a class="headerlink" href="#state-transition" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.state_transition">
 <span class="sig-name descname"><span class="pre">state_transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.state_transition" title="Permalink to this definition"></a></dt>
 <dd><p>Attempts to apply a block to an existing block chain.</p>
+<p>All parts of the block’s contents need to be verified before being added
+to the chain. Blocks are verified by ensuring that the contents of the
+block make logical sense with the contents of the parent block. The
+information in the block’s header must also match the corresponding
+information in the block.</p>
+<p>To implement Ethereum, in theory clients are only required to store the
+most recent 255 blocks of the chain since as far as execution is
+concerned, only those blocks are accessed. Practically, however, clients
+should store more blocks to handle reorgs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -565,11 +657,17 @@ block number.</p>
 </div>
 </section>
 <section id="validate-header">
-<h4>validate_header<a class="headerlink" href="#validate-header" title="Permalink to this headline"></a></h4>
+<h3>validate_header<a class="headerlink" href="#validate-header" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.validate_header">
 <span class="sig-name descname"><span class="pre">validate_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_header</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.validate_header" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies a block header.</p>
+<p>In order to consider a block’s header valid, the logic for the
+quantities in the header should match the logic for the block itself.
+For example the header timestamp should be greater than the block’s parent
+timestamp because the block was created <em>after</em> the parent block.
+Additionally, the block’s number should be directly folowing the parent
+block’s number since it is the next block in the sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -611,31 +709,18 @@ block number.</p>
 </div>
 </section>
 <section id="generate-header-hash-for-pow">
-<h4>generate_header_hash_for_pow<a class="headerlink" href="#generate-header-hash-for-pow" title="Permalink to this headline"></a></h4>
+<h3>generate_header_hash_for_pow<a class="headerlink" href="#generate-header-hash-for-pow" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.generate_header_hash_for_pow">
 <span class="sig-name descname"><span class="pre">generate_header_hash_for_pow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.generate_header_hash_for_pow" title="Permalink to this definition"></a></dt>
 <dd><p>Generate rlp hash of the header which is to be used for Proof-of-Work
-verification. This hash is generated with the following header fields:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><cite>parent_hash</cite></p></li>
-<li><p><cite>ommers_hash</cite></p></li>
-<li><p><cite>coinbase</cite></p></li>
-<li><p><cite>state_root</cite></p></li>
-<li><p><cite>transactions_root</cite></p></li>
-<li><p><cite>receipt_root</cite></p></li>
-<li><p><cite>bloom</cite></p></li>
-<li><p><cite>difficulty</cite></p></li>
-<li><p><cite>number</cite></p></li>
-<li><p><cite>gas_limit</cite></p></li>
-<li><p><cite>gas_used</cite></p></li>
-<li><p><cite>timestamp</cite></p></li>
-<li><p><cite>extra_data</cite></p></li>
-</ul>
-</div></blockquote>
+verification.</p>
 <p>In other words, the PoW artefacts <cite>mix_digest</cite> and <cite>nonce</cite> are ignored
 while calculating this hash.</p>
+<p>A particular PoW is valid for a single hash, that hash is computed by
+this function. The <cite>nonce</cite> and <cite>mix_digest</cite> are omitted from this hash
+because they are being changed by miners in their search for a sufficient
+proof-of-work.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>header</strong> – The header object for which the hash is to be generated.</p>
@@ -671,11 +756,16 @@ while calculating this hash.</p>
 </div>
 </section>
 <section id="validate-proof-of-work">
-<h4>validate_proof_of_work<a class="headerlink" href="#validate-proof-of-work" title="Permalink to this headline"></a></h4>
+<h3>validate_proof_of_work<a class="headerlink" href="#validate-proof-of-work" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.validate_proof_of_work">
 <span class="sig-name descname"><span class="pre">validate_proof_of_work</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.validate_proof_of_work" title="Permalink to this definition"></a></dt>
 <dd><p>Validates the Proof of Work constraints.</p>
+<p>In order to verify that a miner’s proof-of-work is valid for a block, a
+<code class="docutils literal notranslate"><span class="pre">mix-digest</span></code> and <code class="docutils literal notranslate"><span class="pre">result</span></code> are calculated using the <code class="docutils literal notranslate"><span class="pre">hashimoto_light</span></code>
+hash function. The mix digest is a hash of the header and the nonce that
+is passed through and it confirms whether or not proof-of-work was done
+on the correct block. The result is the actual hash value of the block.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>header</strong> – Header of interest.</p>
@@ -701,11 +791,17 @@ while calculating this hash.</p>
 </div>
 </section>
 <section id="apply-body">
-<h4>apply_body<a class="headerlink" href="#apply-body" title="Permalink to this headline"></a></h4>
+<h3>apply_body<a class="headerlink" href="#apply-body" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.apply_body">
 <span class="sig-name descname"><span class="pre">apply_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_hashes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coinbase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_gas_limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_difficulty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ommers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.apply_body" title="Permalink to this definition"></a></dt>
 <dd><p>Executes a block.</p>
+<p>Many of the contents of a block are stored in data structures called
+tries. There is a transactions trie which is similar to a ledger of the
+transactions stored in the current block. There is also a receipts trie
+which stores the results of executing a transaction, like the post state
+and gas used. This function creates and executes the block that is to be
+added to the chain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -724,12 +820,12 @@ uncles.)</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>gas_available</strong> (<cite>eth1spec.base_types.Uint</cite>) – Remaining gas after all transactions have been executed.</p></li>
-<li><p><strong>transactions_root</strong> (<cite>eth1spec.eth_types.Root</cite>) – Trie root of all the transactions in the block.</p></li>
-<li><p><strong>receipt_root</strong> (<cite>eth1spec.eth_types.Root</cite>) – Trie root of all the receipts in the block.</p></li>
+<li><p><strong>gas_available</strong> (<cite>ethereum.base_types.Uint</cite>) – Remaining gas after all transactions have been executed.</p></li>
+<li><p><strong>transactions_root</strong> (<cite>ethereum.eth_types.Root</cite>) – Trie root of all the transactions in the block.</p></li>
+<li><p><strong>receipt_root</strong> (<cite>ethereum.eth_types.Root</cite>) – Trie root of all the receipts in the block.</p></li>
 <li><p><strong>block_logs_bloom</strong> (<cite>Bloom</cite>) – Logs bloom of all the logs included in all the transactions of the
 block.</p></li>
-<li><p><strong>state</strong> (<cite>eth1spec.eth_types.State</cite>) – State after all transactions have been executed.</p></li>
+<li><p><strong>state</strong> (<cite>ethereum.eth_types.State</cite>) – State after all transactions have been executed.</p></li>
 </ul>
 </p>
 </dd>
@@ -807,11 +903,18 @@ block.</p></li>
 </div>
 </section>
 <section id="validate-ommers">
-<h4>validate_ommers<a class="headerlink" href="#validate-ommers" title="Permalink to this headline"></a></h4>
+<h3>validate_ommers<a class="headerlink" href="#validate-ommers" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.validate_ommers">
 <span class="sig-name descname"><span class="pre">validate_ommers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ommers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.validate_ommers" title="Permalink to this definition"></a></dt>
 <dd><p>Validates the ommers mentioned in the block.</p>
+<p>An ommer block is a block that wasn’t canonically added to the
+blockchain because it wasn’t validated as fast as the canonical block
+but was mined at the same time.</p>
+<p>To be considered valid, the ommers must adhere to the rules defined in
+the Ethereum protocol. The maximum amount of ommers is 2 per block and
+there cannot be duplicate ommers in a block. Many of the other ommer
+contraints are listed in the in-line comments of this function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -884,11 +987,21 @@ block.</p></li>
 </div>
 </section>
 <section id="pay-rewards">
-<h4>pay_rewards<a class="headerlink" href="#pay-rewards" title="Permalink to this headline"></a></h4>
+<h3>pay_rewards<a class="headerlink" href="#pay-rewards" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.pay_rewards">
 <span class="sig-name descname"><span class="pre">pay_rewards</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coinbase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ommers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.pay_rewards" title="Permalink to this definition"></a></dt>
 <dd><p>Pay rewards to the block miner as well as the ommers miners.</p>
+<p>The miner of the canonical block is rewarded with the predetermined
+block reward, <code class="docutils literal notranslate"><span class="pre">BLOCK_REWARD</span></code>, plus a variable award based off of the
+number of ommer blocks that were mined around the same time, and included
+in the canonical block’s header. An ommer block is a block that wasn’t
+added to the canonical blockchain because it wasn’t validated as fast as
+the accepted block but was mined at the same time. Although not all blocks
+that are mined are added to the canonical chain, miners are still paid a
+reward for their efforts. This reward is called an ommer reward and is
+calculated based on the number associated with the ommer block that they
+mined.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -919,11 +1032,18 @@ block.</p></li>
 </div>
 </section>
 <section id="process-transaction">
-<h4>process_transaction<a class="headerlink" href="#process-transaction" title="Permalink to this headline"></a></h4>
+<h3>process_transaction<a class="headerlink" href="#process-transaction" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.process_transaction">
 <span class="sig-name descname"><span class="pre">process_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.process_transaction" title="Permalink to this definition"></a></dt>
 <dd><p>Execute a transaction against the provided environment.</p>
+<p>This function processes the actions needed to execute a transaction.
+It decrements the sender’s account after calculating the gas fee and
+refunds them the proper amount after execution. Calling contracts,
+deploying code, and incrementing nonces are all examples of actions that
+happen within this function or from a call made within this function.</p>
+<p>Accounts that are marked for deletion are processed and destroyed after
+execution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -933,8 +1053,8 @@ block.</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>gas_left</strong> (<cite>eth1spec.base_types.U256</cite>) – Remaining gas after execution.</p></li>
-<li><p><strong>logs</strong> (<cite>Tuple[eth1spec.eth_types.Log, …]</cite>) – Logs generated during execution.</p></li>
+<li><p><strong>gas_left</strong> (<cite>ethereum.base_types.U256</cite>) – Remaining gas after execution.</p></li>
+<li><p><strong>logs</strong> (<cite>Tuple[ethereum.eth_types.Log, …]</cite>) – Logs generated during execution.</p></li>
 </ul>
 </p>
 </dd>
@@ -950,7 +1070,8 @@ block.</p></li>
     <span class="n">sender_account</span> <span class="o">=</span> <span class="n">get_account</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span>
     <span class="n">gas_fee</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">gas</span> <span class="o">*</span> <span class="n">tx</span><span class="o">.</span><span class="n">gas_price</span>
     <span class="n">ensure</span><span class="p">(</span><span class="n">sender_account</span><span class="o">.</span><span class="n">nonce</span> <span class="o">==</span> <span class="n">tx</span><span class="o">.</span><span class="n">nonce</span><span class="p">,</span> <span class="n">InvalidBlock</span><span class="p">)</span>
-    <span class="n">ensure</span><span class="p">(</span><span class="n">sender_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">gas_fee</span><span class="p">,</span> <span class="n">InvalidBlock</span><span class="p">)</span>
+    <span class="n">ensure</span><span class="p">(</span><span class="n">sender_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">gas_fee</span> <span class="o">+</span> <span class="n">tx</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">InvalidBlock</span><span class="p">)</span>
+    <span class="n">ensure</span><span class="p">(</span><span class="n">sender_account</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="nb">bytearray</span><span class="p">(),</span> <span class="n">InvalidBlock</span><span class="p">)</span>
 
     <span class="n">gas</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">gas</span> <span class="o">-</span> <span class="n">calculate_intrinsic_cost</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
     <span class="n">increment_nonce</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span>
@@ -996,11 +1117,20 @@ block.</p></li>
 </div>
 </section>
 <section id="validate-transaction">
-<h4>validate_transaction<a class="headerlink" href="#validate-transaction" title="Permalink to this headline"></a></h4>
+<h3>validate_transaction<a class="headerlink" href="#validate-transaction" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.validate_transaction">
 <span class="sig-name descname"><span class="pre">validate_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.validate_transaction" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies a transaction.</p>
+<p>The gas in a transaction gets used to pay for the intrinsic cost of
+operations, therefore if there is insufficient gas then it would not
+be possible to execute a transaction and it will be declared invalid.</p>
+<p>Additionally, the nonce of a transaction must not equal or exceed the
+limit defined in <a class="reference external" href="https://eips.ethereum.org/EIPS/eip-2681">EIP-2681</a>.
+In practice, defining the limit as <code class="docutils literal notranslate"><span class="pre">2**64-1</span></code> has no impact because
+sending <code class="docutils literal notranslate"><span class="pre">2**64-1</span></code> transactions is improbable. It’s not strictly
+impossible though, <code class="docutils literal notranslate"><span class="pre">2**64-1</span></code> transactions is the entire capacity of the
+Ethereum blockchain at 2022 gas limits for a little over 22 years.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tx</strong> – Transaction to validate.</p>
@@ -1020,12 +1150,19 @@ block.</p></li>
 </div>
 </section>
 <section id="calculate-intrinsic-cost">
-<h4>calculate_intrinsic_cost<a class="headerlink" href="#calculate-intrinsic-cost" title="Permalink to this headline"></a></h4>
+<h3>calculate_intrinsic_cost<a class="headerlink" href="#calculate-intrinsic-cost" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.calculate_intrinsic_cost">
 <span class="sig-name descname"><span class="pre">calculate_intrinsic_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.calculate_intrinsic_cost" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the intrinsic cost of the transaction that is charged before
-execution is instantiated.</p>
+<dd><p>Calculates the gas that is charged before execution is started.</p>
+<p>The intrinsic cost of the transaction is charged before execution has
+begun. Functions/operations in the EVM cost money to execute so this
+intrinsic cost is for the operations that need to be paid for as part of
+the transaction. Data transfer, for example, is part of this intrinsic
+cost. It costs ether to send data over the wire and that ether is
+accounted for in the intrinsic cost calculated in this function. This
+intrinsic cost must be calculated and paid for before execution in order
+for all operations to be implemented.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tx</strong> – Transaction to compute the intrinsic cost of.</p>
@@ -1034,7 +1171,7 @@ execution is instantiated.</p>
 <dd class="field-even"><p><strong>verified</strong> – The intrinsic cost of the transaction.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>eth1spec.base_types.Uint</cite></p>
+<dd class="field-odd"><p><cite>ethereum.base_types.Uint</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1058,11 +1195,16 @@ execution is instantiated.</p>
 </div>
 </section>
 <section id="recover-sender">
-<h4>recover_sender<a class="headerlink" href="#recover-sender" title="Permalink to this headline"></a></h4>
+<h3>recover_sender<a class="headerlink" href="#recover-sender" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.recover_sender">
 <span class="sig-name descname"><span class="pre">recover_sender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.recover_sender" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts the sender address from a transaction.</p>
+<p>The v, r, and s values are the three parts that make up the signature
+of a transaction. In order to recover the sender of a transaction the two
+components needed are the signature (<code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">r</span></code>, and <code class="docutils literal notranslate"><span class="pre">s</span></code>) and the
+signing hash of the transaction. The sender’s public key can be obtained
+with these two values and therefore the sender address can be retrieved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tx</strong> – Transaction of interest.</p>
@@ -1071,7 +1213,7 @@ execution is instantiated.</p>
 <dd class="field-even"><p><strong>sender</strong> – The address of the account that signed the transaction.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>eth1spec.eth_types.Address</cite></p>
+<dd class="field-odd"><p><cite>ethereum.eth_types.Address</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1092,11 +1234,14 @@ execution is instantiated.</p>
 </div>
 </section>
 <section id="signing-hash">
-<h4>signing_hash<a class="headerlink" href="#signing-hash" title="Permalink to this headline"></a></h4>
+<h3>signing_hash<a class="headerlink" href="#signing-hash" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.signing_hash">
 <span class="sig-name descname"><span class="pre">signing_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.signing_hash" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the hash of a transaction used in the signature.</p>
+<p>The values that are used to compute the signing hash set the rules for a
+transaction. For example, signing over the gas sets a limit for the
+amount of money that is allowed to be pulled out of the sender’s account.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tx</strong> – Transaction of interest.</p>
@@ -1105,7 +1250,7 @@ execution is instantiated.</p>
 <dd class="field-even"><p><strong>hash</strong> – Hash of the transaction.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>eth1spec.eth_types.Hash32</cite></p>
+<dd class="field-odd"><p><cite>ethereum.eth_types.Hash32</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1127,11 +1272,26 @@ execution is instantiated.</p>
 </div>
 </section>
 <section id="compute-header-hash">
-<h4>compute_header_hash<a class="headerlink" href="#compute-header-hash" title="Permalink to this headline"></a></h4>
+<h3>compute_header_hash<a class="headerlink" href="#compute-header-hash" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.compute_header_hash">
 <span class="sig-name descname"><span class="pre">compute_header_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.compute_header_hash" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the hash of a block header.</p>
+<p>The header hash of a block is the canonical hash that is used to refer
+to a specific block and completely distinguishes a block from another.</p>
+<p><code class="docutils literal notranslate"><span class="pre">keccak256</span></code> is a function that produces a 256 bit hash of any input.
+It also takes in any number of bytes as an input and produces a single
+hash for them. A hash is a completely unique output for a single input.
+So an input corresponds to one unique hash that can be used to identify
+the input exactly.</p>
+<p>Prior to using the <code class="docutils literal notranslate"><span class="pre">keccak256</span></code> hash function, the header must be
+encoded using the Recursive-Length Prefix. See <a class="reference internal" href="../../rlp/index.pickle#rlp"><span class="std std-ref">Recursive Length Prefix (RLP) Encoding</span></a>.
+RLP encoding the header converts it into a space-efficient format that
+allows for easy transfer of data between nodes. The purpose of RLP is to
+encode arbitrarily nested arrays of binary data, and RLP is the primary
+encoding method used to serialize objects in Ethereum’s execution layer.
+The only purpose of RLP is to encode structure; encoding specific data
+types (e.g. strings, floats) is left up to higher-order protocols.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>header</strong> – Header of interest.</p>
@@ -1151,11 +1311,21 @@ execution is instantiated.</p>
 </div>
 </section>
 <section id="check-gas-limit">
-<h4>check_gas_limit<a class="headerlink" href="#check-gas-limit" title="Permalink to this headline"></a></h4>
+<h3>check_gas_limit<a class="headerlink" href="#check-gas-limit" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.check_gas_limit">
 <span class="sig-name descname"><span class="pre">check_gas_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gas_limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_gas_limit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.check_gas_limit" title="Permalink to this definition"></a></dt>
 <dd><p>Validates the gas limit for a block.</p>
+<p>The bounds of the gas limit, <code class="docutils literal notranslate"><span class="pre">max_adjustment_delta</span></code>, is set as the
+quotient of the parent block’s gas limit and the
+<code class="docutils literal notranslate"><span class="pre">GAS_LIMIT_ADJUSTMENT_FACTOR</span></code>. Therefore, if the gas limit that is
+passed through as a parameter is greater than or equal to the <em>sum</em> of
+the parent’s gas and the adjustment delta then the limit for gas is too
+high and fails this function’s check. Similarly, if the limit is less
+than or equal to the <em>difference</em> of the parent’s gas and the adjustment
+delta <em>or</em> the predefined <code class="docutils literal notranslate"><span class="pre">GAS_LIMIT_MINIMUM</span></code> then this function’s
+check fails because the gas limit doesn’t allow for a sufficient or
+reasonable amount of gas to be used on a block.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1186,11 +1356,26 @@ execution is instantiated.</p>
 </div>
 </section>
 <section id="calculate-block-difficulty">
-<h4>calculate_block_difficulty<a class="headerlink" href="#calculate-block-difficulty" title="Permalink to this headline"></a></h4>
+<h3>calculate_block_difficulty<a class="headerlink" href="#calculate-block-difficulty" title="Permalink to this headline"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="ethereum.dao_fork.spec.calculate_block_difficulty">
 <span class="sig-name descname"><span class="pre">calculate_block_difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_difficulty</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ethereum.dao_fork.spec.calculate_block_difficulty" title="Permalink to this definition"></a></dt>
 <dd><p>Computes difficulty of a block using its header and parent header.</p>
+<p>The difficulty is determined by the time the block was created after its
+parent. The <code class="docutils literal notranslate"><span class="pre">offset</span></code> is calculated using the parent block’s difficulty,
+<code class="docutils literal notranslate"><span class="pre">parent_difficulty</span></code>, and the timestamp between blocks. This offset is
+then added to the parent difficulty and is stored as the <code class="docutils literal notranslate"><span class="pre">difficulty</span></code>
+variable. If the time between the block and its parent is too short, the
+offset will result in a positive number thus making the sum of
+<code class="docutils literal notranslate"><span class="pre">parent_difficulty</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code> to be a greater value in order to
+avoid mass forking. But, if the time is long enough, then the offset
+results in a negative value making the block less difficult than
+its parent.</p>
+<p>The base standard for a block’s difficulty is the predefined value
+set for the genesis block since it has no parent. So, a block
+can’t be less difficult than the genesis block, therefore each block’s
+difficulty is set to the maximum value between the calculated
+difficulty and the <code class="docutils literal notranslate"><span class="pre">GENESIS_DIFFICULTY</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1228,14 +1413,14 @@ execution is instantiated.</p>
     <span class="c1"># See https://github.com/ethereum/go-ethereum/pull/1588</span>
     <span class="n">num_bomb_periods</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">block_number</span><span class="p">)</span> <span class="o">//</span> <span class="mi">100000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
     <span class="k">if</span> <span class="n">num_bomb_periods</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Uint</span><span class="p">(</span>
-            <span class="nb">max</span><span class="p">(</span><span class="n">difficulty</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**</span><span class="n">num_bomb_periods</span><span class="p">,</span> <span class="n">GENESIS_DIFFICULTY</span><span class="p">)</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Uint</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">difficulty</span><span class="p">,</span> <span class="n">GENESIS_DIFFICULTY</span><span class="p">))</span>
+        <span class="n">difficulty</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">**</span><span class="n">num_bomb_periods</span>
+
+    <span class="c1"># Some clients raise the difficulty to `MINIMUM_DIFFICULTY` prior to adding</span>
+    <span class="c1"># the bomb. This bug does not matter because the difficulty is always much</span>
+    <span class="c1"># greater than `MINIMUM_DIFFICULTY` on Mainnet.</span>
+    <span class="k">return</span> <span class="n">Uint</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">difficulty</span><span class="p">,</span> <span class="n">MINIMUM_DIFFICULTY</span><span class="p">))</span>
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -1244,8 +1429,8 @@ execution is instantiated.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../vm/instructions/system/index.html" class="btn btn-neutral float-left" title="ethereum.dao_fork.vm.instructions.systemethereum.tangerine_whistle.vm.instructions.system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../utils/message/index.html" class="btn btn-neutral float-right" title="ethereum.dao_fork.utils.messageethereum.tangerine_whistle.utils.message" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Ethereum DaoTangerine Whistle Hardfork" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../vm/gas/index.html" class="btn btn-neutral float-right" title="Ethereum Virtual Machine (EVM) Gas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

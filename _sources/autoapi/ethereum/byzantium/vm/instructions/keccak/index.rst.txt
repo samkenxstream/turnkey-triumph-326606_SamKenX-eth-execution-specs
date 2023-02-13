@@ -1,6 +1,3 @@
-:mod:`ethereum.byzantium.vm.instructions.keccak`
-================================================
-
 .. py:module:: ethereum.byzantium.vm.instructions.keccak
 
 Ethereum Virtual Machine (EVM) Keccak Instructions
@@ -15,6 +12,8 @@ Introduction
 
 Implementations of the EVM keccak instructions.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -46,8 +45,6 @@ keccak
    access the data's memory location.
 
    :param evm: The current EVM frame.
-
-   :raises ~ethereum.byzantium.vm.exceptions.StackUnderflowError: If `len(stack)` is less than `2`.
 
 
 

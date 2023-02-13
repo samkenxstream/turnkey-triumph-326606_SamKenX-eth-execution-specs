@@ -1,9 +1,6 @@
-:mod:`ethereum.istanbul.utils.message`
-======================================
-
 .. py:module:: ethereum.istanbul.utils.message
 
-Istanbul Utility Functions For The Message Data-structure
+Hardfork Utility Functions For The Message Data-structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. contents:: Table of Contents
@@ -16,6 +13,8 @@ Introduction
 Message specific functions used in this istanbul version of
 specification.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------

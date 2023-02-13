@@ -1,6 +1,3 @@
-:mod:`ethereum.homestead.vm.precompiled_contracts.mapping`
-==========================================================
-
 .. py:module:: ethereum.homestead.vm.precompiled_contracts.mapping
 
 Precompiled Contract Addresses
@@ -16,6 +13,8 @@ Introduction
 Mapping of precompiled contracts their implementations.
 
 
+.. only:: stage1
+
 Module Contents
 ---------------
 
@@ -26,10 +25,10 @@ PRE_COMPILED_CONTRACTS
 
 
 .. py:data:: PRE_COMPILED_CONTRACTS
-
+   
    
 
 .. undocinclude:: /../src/ethereum/homestead/vm/precompiled_contracts/mapping.py
    :language: python
-   :lines: 23-28
+   :lines: 28-33
 

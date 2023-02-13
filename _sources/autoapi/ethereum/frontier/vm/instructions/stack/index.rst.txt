@@ -1,6 +1,3 @@
-:mod:`ethereum.frontier.vm.instructions.stack`
-==============================================
-
 .. py:module:: ethereum.frontier.vm.instructions.stack
 
 Ethereum Virtual Machine (EVM) Stack Instructions
@@ -15,6 +12,8 @@ Introduction
 
 Implementations of the EVM stack related instructions.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -118,9 +117,6 @@ pop
 
    :param evm: The current EVM frame.
 
-   :raises ~ethereum.frontier.vm.exceptions.StackUnderflowError: If `len(stack)` is less than `1`.
-   :raises ~ethereum.frontier.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `2`.
-
 
 
 
@@ -141,9 +137,6 @@ push_n
    :param num_bytes: The number of immediate bytes to be read from the code and pushed to
                      the stack.
 
-   :raises ~ethereum.frontier.vm.exceptions.StackOverflowError: If `len(stack)` is equals `1024`.
-   :raises ~ethereum.frontier.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `3`.
-
 
 
 
@@ -163,8 +156,6 @@ dup_n
    :param evm: The current EVM frame.
    :param item_number: The stack item number (0-indexed from top of stack) to be duplicated
                        to the top of stack.
-
-   :raises ~ethereum.frontier.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `3`.
 
 
 
@@ -190,8 +181,6 @@ swap_n
    :param item_number: The stack item number (0-indexed from top of stack) to be swapped
                        with the top of stack element.
 
-   :raises ~ethereum.frontier.vm.exceptions.OutOfGasError: If `evm.gas_left` is less than `3`.
-
 
 
 
@@ -205,12 +194,12 @@ push1
 
 
 .. py:data:: push1
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 139-139
+   :lines: 143-143
 
 
 push2
@@ -219,12 +208,12 @@ push2
 
 
 .. py:data:: push2
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 140-140
+   :lines: 144-144
 
 
 push3
@@ -233,12 +222,12 @@ push3
 
 
 .. py:data:: push3
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 141-141
+   :lines: 145-145
 
 
 push4
@@ -247,12 +236,12 @@ push4
 
 
 .. py:data:: push4
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 142-142
+   :lines: 146-146
 
 
 push5
@@ -261,12 +250,12 @@ push5
 
 
 .. py:data:: push5
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 143-143
+   :lines: 147-147
 
 
 push6
@@ -275,12 +264,12 @@ push6
 
 
 .. py:data:: push6
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 144-144
+   :lines: 148-148
 
 
 push7
@@ -289,12 +278,12 @@ push7
 
 
 .. py:data:: push7
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 145-145
+   :lines: 149-149
 
 
 push8
@@ -303,12 +292,12 @@ push8
 
 
 .. py:data:: push8
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 146-146
+   :lines: 150-150
 
 
 push9
@@ -317,12 +306,12 @@ push9
 
 
 .. py:data:: push9
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 147-147
+   :lines: 151-151
 
 
 push10
@@ -331,12 +320,12 @@ push10
 
 
 .. py:data:: push10
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 148-148
+   :lines: 152-152
 
 
 push11
@@ -345,12 +334,12 @@ push11
 
 
 .. py:data:: push11
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 149-149
+   :lines: 153-153
 
 
 push12
@@ -359,12 +348,12 @@ push12
 
 
 .. py:data:: push12
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 150-150
+   :lines: 154-154
 
 
 push13
@@ -373,12 +362,12 @@ push13
 
 
 .. py:data:: push13
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 151-151
+   :lines: 155-155
 
 
 push14
@@ -387,12 +376,12 @@ push14
 
 
 .. py:data:: push14
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 152-152
+   :lines: 156-156
 
 
 push15
@@ -401,12 +390,12 @@ push15
 
 
 .. py:data:: push15
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 153-153
+   :lines: 157-157
 
 
 push16
@@ -415,12 +404,12 @@ push16
 
 
 .. py:data:: push16
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 154-154
+   :lines: 158-158
 
 
 push17
@@ -429,12 +418,12 @@ push17
 
 
 .. py:data:: push17
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 155-155
+   :lines: 159-159
 
 
 push18
@@ -443,12 +432,12 @@ push18
 
 
 .. py:data:: push18
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 156-156
+   :lines: 160-160
 
 
 push19
@@ -457,12 +446,12 @@ push19
 
 
 .. py:data:: push19
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 157-157
+   :lines: 161-161
 
 
 push20
@@ -471,12 +460,12 @@ push20
 
 
 .. py:data:: push20
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 158-158
+   :lines: 162-162
 
 
 push21
@@ -485,12 +474,12 @@ push21
 
 
 .. py:data:: push21
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 159-159
+   :lines: 163-163
 
 
 push22
@@ -499,12 +488,12 @@ push22
 
 
 .. py:data:: push22
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 160-160
+   :lines: 164-164
 
 
 push23
@@ -513,12 +502,12 @@ push23
 
 
 .. py:data:: push23
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 161-161
+   :lines: 165-165
 
 
 push24
@@ -527,12 +516,12 @@ push24
 
 
 .. py:data:: push24
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 162-162
+   :lines: 166-166
 
 
 push25
@@ -541,12 +530,12 @@ push25
 
 
 .. py:data:: push25
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 163-163
+   :lines: 167-167
 
 
 push26
@@ -555,12 +544,12 @@ push26
 
 
 .. py:data:: push26
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 164-164
+   :lines: 168-168
 
 
 push27
@@ -569,12 +558,12 @@ push27
 
 
 .. py:data:: push27
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 165-165
+   :lines: 169-169
 
 
 push28
@@ -583,12 +572,12 @@ push28
 
 
 .. py:data:: push28
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 166-166
+   :lines: 170-170
 
 
 push29
@@ -597,12 +586,12 @@ push29
 
 
 .. py:data:: push29
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 167-167
+   :lines: 171-171
 
 
 push30
@@ -611,12 +600,12 @@ push30
 
 
 .. py:data:: push30
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 168-168
+   :lines: 172-172
 
 
 push31
@@ -625,12 +614,12 @@ push31
 
 
 .. py:data:: push31
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 169-169
+   :lines: 173-173
 
 
 push32
@@ -639,12 +628,12 @@ push32
 
 
 .. py:data:: push32
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 170-170
+   :lines: 174-174
 
 
 dup1
@@ -653,12 +642,12 @@ dup1
 
 
 .. py:data:: dup1
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 172-172
+   :lines: 176-176
 
 
 dup2
@@ -667,12 +656,12 @@ dup2
 
 
 .. py:data:: dup2
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 173-173
+   :lines: 177-177
 
 
 dup3
@@ -681,12 +670,12 @@ dup3
 
 
 .. py:data:: dup3
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 174-174
+   :lines: 178-178
 
 
 dup4
@@ -695,12 +684,12 @@ dup4
 
 
 .. py:data:: dup4
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 175-175
+   :lines: 179-179
 
 
 dup5
@@ -709,12 +698,12 @@ dup5
 
 
 .. py:data:: dup5
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 176-176
+   :lines: 180-180
 
 
 dup6
@@ -723,12 +712,12 @@ dup6
 
 
 .. py:data:: dup6
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 177-177
+   :lines: 181-181
 
 
 dup7
@@ -737,12 +726,12 @@ dup7
 
 
 .. py:data:: dup7
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 178-178
+   :lines: 182-182
 
 
 dup8
@@ -751,12 +740,12 @@ dup8
 
 
 .. py:data:: dup8
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 179-179
+   :lines: 183-183
 
 
 dup9
@@ -765,12 +754,12 @@ dup9
 
 
 .. py:data:: dup9
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 180-180
+   :lines: 184-184
 
 
 dup10
@@ -779,12 +768,12 @@ dup10
 
 
 .. py:data:: dup10
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 181-181
+   :lines: 185-185
 
 
 dup11
@@ -793,12 +782,12 @@ dup11
 
 
 .. py:data:: dup11
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 182-182
+   :lines: 186-186
 
 
 dup12
@@ -807,12 +796,12 @@ dup12
 
 
 .. py:data:: dup12
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 183-183
+   :lines: 187-187
 
 
 dup13
@@ -821,12 +810,12 @@ dup13
 
 
 .. py:data:: dup13
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 184-184
+   :lines: 188-188
 
 
 dup14
@@ -835,12 +824,12 @@ dup14
 
 
 .. py:data:: dup14
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 185-185
+   :lines: 189-189
 
 
 dup15
@@ -849,12 +838,12 @@ dup15
 
 
 .. py:data:: dup15
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 186-186
+   :lines: 190-190
 
 
 dup16
@@ -863,12 +852,12 @@ dup16
 
 
 .. py:data:: dup16
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 187-187
+   :lines: 191-191
 
 
 swap1
@@ -877,12 +866,12 @@ swap1
 
 
 .. py:data:: swap1
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 189-189
+   :lines: 193-193
 
 
 swap2
@@ -891,12 +880,12 @@ swap2
 
 
 .. py:data:: swap2
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 190-190
+   :lines: 194-194
 
 
 swap3
@@ -905,12 +894,12 @@ swap3
 
 
 .. py:data:: swap3
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 191-191
+   :lines: 195-195
 
 
 swap4
@@ -919,12 +908,12 @@ swap4
 
 
 .. py:data:: swap4
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 192-192
+   :lines: 196-196
 
 
 swap5
@@ -933,12 +922,12 @@ swap5
 
 
 .. py:data:: swap5
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 193-193
+   :lines: 197-197
 
 
 swap6
@@ -947,12 +936,12 @@ swap6
 
 
 .. py:data:: swap6
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 194-194
+   :lines: 198-198
 
 
 swap7
@@ -961,12 +950,12 @@ swap7
 
 
 .. py:data:: swap7
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 195-195
+   :lines: 199-199
 
 
 swap8
@@ -975,12 +964,12 @@ swap8
 
 
 .. py:data:: swap8
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 196-196
+   :lines: 200-200
 
 
 swap9
@@ -989,12 +978,12 @@ swap9
 
 
 .. py:data:: swap9
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 197-197
+   :lines: 201-201
 
 
 swap10
@@ -1003,12 +992,12 @@ swap10
 
 
 .. py:data:: swap10
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 198-198
+   :lines: 202-202
 
 
 swap11
@@ -1017,12 +1006,12 @@ swap11
 
 
 .. py:data:: swap11
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 199-199
+   :lines: 203-203
 
 
 swap12
@@ -1031,12 +1020,12 @@ swap12
 
 
 .. py:data:: swap12
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 200-200
+   :lines: 204-204
 
 
 swap13
@@ -1045,12 +1034,12 @@ swap13
 
 
 .. py:data:: swap13
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 201-201
+   :lines: 205-205
 
 
 swap14
@@ -1059,12 +1048,12 @@ swap14
 
 
 .. py:data:: swap14
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 202-202
+   :lines: 206-206
 
 
 swap15
@@ -1073,12 +1062,12 @@ swap15
 
 
 .. py:data:: swap15
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 203-203
+   :lines: 207-207
 
 
 swap16
@@ -1087,10 +1076,10 @@ swap16
 
 
 .. py:data:: swap16
-
+   
    
 
 .. undocinclude:: /../src/ethereum/frontier/vm/instructions/stack.py
    :language: python
-   :lines: 204-204
+   :lines: 208-208
 

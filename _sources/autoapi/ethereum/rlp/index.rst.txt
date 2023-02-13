@@ -1,7 +1,6 @@
-:mod:`ethereum.rlp`
-===================
-
 .. py:module:: ethereum.rlp
+
+.. _rlp:
 
 Recursive Length Prefix (RLP) Encoding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -15,6 +14,8 @@ Introduction
 
 Defines the serialization and deserialization format used throughout Ethereum.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
@@ -59,12 +60,12 @@ RLP
 
 
 .. py:data:: RLP
-
+   
    
 
 .. undocinclude:: /../src/ethereum/rlp.py
    :language: python
-   :lines: 26-26
+   :lines: 28-28
 
 
 encode
@@ -182,12 +183,12 @@ T
 
 
 .. py:data:: T
-
+   
    
 
 .. undocinclude:: /../src/ethereum/rlp.py
    :language: python
-   :lines: 184-184
+   :lines: 186-186
 
 
 decode_to
@@ -222,8 +223,8 @@ _decode_to
    :noindexentry:
 
    Decode the rlp structure in `encoded_data` to an object of type `cls`.
-   `cls` can be a `Bytes` subclass, a dataclass, `Uint`, `U256` or
-   `Tuple[cls]`.
+   `cls` can be a `Bytes` subclass, a dataclass, `Uint`, `U256`,
+   `Tuple[cls, ...]`, `Tuple[cls1, cls2]` or `Union[Bytes, cls]`.
 
    :param cls: The type to decode to.
    :type cls: `Type[T]`

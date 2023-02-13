@@ -1,6 +1,3 @@
-:mod:`ethereum.tangerine_whistle.vm.runtime`
-============================================
-
 .. py:module:: ethereum.tangerine_whistle.vm.runtime
 
 Ethereum Virtual Machine (EVM) Runtime Operations
@@ -15,6 +12,8 @@ Introduction
 
 Runtime related operations used while executing EVM code.
 
+
+.. only:: stage1
 
 Module Contents
 ---------------
