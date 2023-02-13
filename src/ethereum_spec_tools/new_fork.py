@@ -35,8 +35,7 @@ The following will have to however, be updated manually
     3. Package Names under setup.cfg
     4. Add the new fork to the monkey_patch() function in \
 src/ethereum_optimized/__init__.py
-    5. Adjust the underline in fork/__init__.py as well as \
-__init__.py, address.py, message.py in fork/utils
+    5. Adjust the underline in fork/__init__.py
 """
 
 parser = argparse.ArgumentParser(
@@ -185,13 +184,13 @@ def main() -> None:
 Fork `{fork}` has been successfully created.
 
 PLEASE REMEMBER TO UPDATE THE FOLLOWING MANUALLY:
-    1. The fork number and MAINNET_FORK_BLOCK in __init__.py
+    1. The fork number and MAINNET_FORK_BLOCK in __init__.py. \
+If you are proposing a new EIP, please set MAINNET_FORK_BLOCK to None.
     2. Any absolute package imports from other forks. Eg. in trie.py
     3. Package Names under setup.cfg
     4. Add the new fork to the monkey_patch() function in \
 src/ethereum_optimized/__init__.py
-    5. Adjust the underline in src/{package}/__init__.py as well as \
-__init__.py, address.py, message.py in src/{package}/utils
+    5. Adjust the underline in src/{package}/__init__.py
 """.format(
         fork=fork_creator.to_fork,
         package=fork_creator.to_package,

@@ -15,7 +15,7 @@ Implementations of the EVM block instructions.
 from ethereum.base_types import U256
 
 from .. import Evm
-from ..gas import GAS_BASE, GAS_BLOCK_HASH, subtract_gas
+from ..gas import GAS_BASE, GAS_BLOCK_HASH, charge_gas
 from ..stack import pop, push
 
 
@@ -29,17 +29,14 @@ def block_hash(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `1`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `20`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BLOCK_HASH)
-
+    # STACK
     block_number = pop(evm.stack)
 
+    # GAS
+    charge_gas(evm, GAS_BLOCK_HASH)
+
+    # OPERATION
     if evm.env.number <= block_number or evm.env.number > block_number + 256:
         # Default hash to 0, if the block of interest is not yet on the chain
         # (including the block which has the current executing transaction),
@@ -50,6 +47,7 @@ def block_hash(evm: Evm) -> None:
 
     push(evm.stack, U256.from_be_bytes(hash))
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -66,16 +64,17 @@ def coinbase(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackOverflowError`
-        If `len(stack)` is equal to `1024`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `2`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BASE)
+    # STACK
+    pass
+
+    # GAS
+    charge_gas(evm, GAS_BASE)
+
+    # OPERATION
     push(evm.stack, U256.from_be_bytes(evm.env.coinbase))
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -92,16 +91,17 @@ def timestamp(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackOverflowError`
-        If `len(stack)` is equal to `1024`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `2`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BASE)
+    # STACK
+    pass
+
+    # GAS
+    charge_gas(evm, GAS_BASE)
+
+    # OPERATION
     push(evm.stack, evm.env.time)
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -117,16 +117,17 @@ def number(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackOverflowError`
-        If `len(stack)` is equal to `1024`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `2`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BASE)
+    # STACK
+    pass
+
+    # GAS
+    charge_gas(evm, GAS_BASE)
+
+    # OPERATION
     push(evm.stack, U256(evm.env.number))
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -142,16 +143,17 @@ def difficulty(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackOverflowError`
-        If `len(stack)` is equal to `1024`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `2`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BASE)
+    # STACK
+    pass
+
+    # GAS
+    charge_gas(evm, GAS_BASE)
+
+    # OPERATION
     push(evm.stack, U256(evm.env.difficulty))
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -167,14 +169,15 @@ def gas_limit(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.homestead.vm.exceptions.StackOverflowError`
-        If `len(stack)` is equal to `1024`.
-    :py:class:`~ethereum.homestead.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `2`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_BASE)
+    # STACK
+    pass
+
+    # GAS
+    charge_gas(evm, GAS_BASE)
+
+    # OPERATION
     push(evm.stack, U256(evm.env.gas_limit))
 
+    # PROGRAM COUNTER
     evm.pc += 1

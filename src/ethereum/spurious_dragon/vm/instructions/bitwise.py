@@ -15,7 +15,7 @@ Implementations of the EVM bitwise instructions.
 from ethereum.base_types import U256
 
 from .. import Evm
-from ..gas import GAS_VERY_LOW, subtract_gas
+from ..gas import GAS_VERY_LOW, charge_gas
 from ..stack import pop, push
 
 
@@ -29,18 +29,18 @@ def bitwise_and(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `2`.
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `GAS_VERY_LOW`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_VERY_LOW)
+    # STACK
     x = pop(evm.stack)
     y = pop(evm.stack)
+
+    # GAS
+    charge_gas(evm, GAS_VERY_LOW)
+
+    # OPERATION
     push(evm.stack, x & y)
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -54,18 +54,18 @@ def bitwise_or(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `2`.
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `GAS_VERY_LOW`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_VERY_LOW)
+    # STACK
     x = pop(evm.stack)
     y = pop(evm.stack)
+
+    # GAS
+    charge_gas(evm, GAS_VERY_LOW)
+
+    # OPERATION
     push(evm.stack, x | y)
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -79,18 +79,18 @@ def bitwise_xor(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `2`.
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `GAS_VERY_LOW`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_VERY_LOW)
+    # STACK
     x = pop(evm.stack)
     y = pop(evm.stack)
+
+    # GAS
+    charge_gas(evm, GAS_VERY_LOW)
+
+    # OPERATION
     push(evm.stack, x ^ y)
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -104,17 +104,17 @@ def bitwise_not(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `1`.
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `GAS_VERY_LOW`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_VERY_LOW)
+    # STACK
     x = pop(evm.stack)
+
+    # GAS
+    charge_gas(evm, GAS_VERY_LOW)
+
+    # OPERATION
     push(evm.stack, ~x)
 
+    # PROGRAM COUNTER
     evm.pc += 1
 
 
@@ -129,19 +129,15 @@ def get_byte(evm: Evm) -> None:
     evm :
         The current EVM frame.
 
-    Raises
-    ------
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.StackUnderflowError`
-        If `len(stack)` is less than `2`.
-    :py:class:`~ethereum.spurious_dragon.vm.exceptions.OutOfGasError`
-        If `evm.gas_left` is less than `GAS_VERY_LOW`.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_VERY_LOW)
-    # 0-indexed from left (most significant) to right (least significant)
-    # in "Big Endian" representation.
+    # STACK
     byte_index = pop(evm.stack)
     word = pop(evm.stack)
 
+    # GAS
+    charge_gas(evm, GAS_VERY_LOW)
+
+    # OPERATION
     if byte_index >= 32:
         result = U256(0)
     else:
@@ -154,4 +150,5 @@ def get_byte(evm: Evm) -> None:
 
     push(evm.stack, result)
 
+    # PROGRAM COUNTER
     evm.pc += 1

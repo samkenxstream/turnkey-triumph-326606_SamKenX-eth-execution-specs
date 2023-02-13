@@ -12,16 +12,31 @@ import pytest
 from _pytest.mark.structures import ParameterSet
 
 from ethereum import rlp
-from ethereum.base_types import U256, Bytes0, Uint64
+from ethereum.base_types import U64, U256, Bytes0
 from ethereum.crypto.hash import Hash32
 from ethereum.utils.hexadecimal import (
     hex_to_bytes,
     hex_to_bytes8,
     hex_to_bytes32,
     hex_to_hash,
+    hex_to_u64,
     hex_to_u256,
     hex_to_uint,
 )
+from ethereum_spec_tools.forks import Hardfork
+
+
+class NoTestsFound(Exception):
+    """
+    An exception thrown when the test for a particular fork isn't
+    available in the json fixture
+    """
+
+
+class NoPostState(Exception):
+    """
+    An exception thrown when the test does not have a postState defined.
+    """
 
 
 class BaseLoad(ABC):
@@ -37,12 +52,47 @@ class BaseLoad(ABC):
 
     @property
     @abstractmethod
+    def proof_of_stake(self) -> bool:
+        pass
+
+    @property
+    @abstractmethod
     def Block(self) -> Any:
         pass
 
     @property
     @abstractmethod
+    def Environment(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
+    def LegacyTransaction(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
+    def Account(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
+    def State(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
+    def set_account(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
     def BlockChain(self) -> Any:
+        pass
+
+    @property
+    @abstractmethod
+    def process_transaction(self) -> Any:
         pass
 
     @property
@@ -81,6 +131,17 @@ class Load(BaseLoad):
         return self._network
 
     @property
+    def proof_of_stake(self) -> bool:
+        forks = Hardfork.discover()
+        merge_fork_found = False
+        for fork in forks:
+            if fork.name == "ethereum.paris":
+                merge_fork_found = True
+            if fork.name == "ethereum." + self._fork_module:
+                break
+        return merge_fork_found
+
+    @property
     def Block(self) -> Any:
         return self._module("eth_types").Block
 
@@ -93,8 +154,36 @@ class Load(BaseLoad):
         return self._module("eth_types").Header
 
     @property
+    def Environment(self) -> Any:
+        return self._module("vm").Environment
+
+    @property
+    def LegacyTransaction(self) -> Any:
+        mod = self._module("eth_types")
+        try:
+            return mod.LegacyTransaction
+        except AttributeError:
+            return mod.Transaction
+
+    @property
+    def Account(self) -> Any:
+        return self._module("eth_types").Account
+
+    @property
+    def State(self) -> Any:
+        return self._module("state").State
+
+    @property
+    def set_account(self) -> Any:
+        return self._module("state").set_account
+
+    @property
     def state_transition(self) -> Any:
         return self._module("spec").state_transition
+
+    @property
+    def process_transaction(self) -> Any:
+        return self._module("spec").process_transaction
 
     @property
     def BlockChain(self) -> Any:
@@ -120,18 +209,17 @@ class Load(BaseLoad):
         return importlib.import_module(f"ethereum.{self._fork_module}.{name}")
 
     def json_to_state(self, raw: Any) -> Any:
-        state = self._module("state").State()
-        set_account = self._module("state").set_account
+        state = self.State()
         set_storage = self._module("state").set_storage
 
         for (addr_hex, acc_state) in raw.items():
             addr = self.hex_to_address(addr_hex)
-            account = self._module("eth_types").Account(
+            account = self.Account(
                 nonce=hex_to_uint(acc_state.get("nonce", "0x0")),
                 balance=U256(hex_to_uint(acc_state.get("balance", "0x0"))),
                 code=hex_to_bytes(acc_state.get("code", "")),
             )
-            set_account(state, addr, account)
+            self.set_account(state, addr, account)
 
             for (k, v) in acc_state.get("storage", {}).items():
                 set_storage(
@@ -142,10 +230,23 @@ class Load(BaseLoad):
                 )
         return state
 
+    def json_to_access_list(self, raw: Any) -> Any:
+        access_list = []
+        for sublist in raw:
+            access_list.append(
+                (
+                    self.hex_to_address(sublist.get("address")),
+                    [
+                        hex_to_bytes32(key)
+                        for key in sublist.get("storageKeys")
+                    ],
+                )
+            )
+        return access_list
+
     def json_to_tx(self, raw: Any) -> Any:
-        return self._module("eth_types").Transaction(
+        parameters = [
             hex_to_u256(raw.get("nonce")),
-            hex_to_u256(raw.get("gasPrice")),
             hex_to_u256(raw.get("gasLimit")),
             Bytes0(b"")
             if raw.get("to") == ""
@@ -155,7 +256,46 @@ class Load(BaseLoad):
             hex_to_u256(raw.get("v")),
             hex_to_u256(raw.get("r")),
             hex_to_u256(raw.get("s")),
-        )
+        ]
+
+        # London and beyond
+        if "maxFeePerGas" in raw and "maxPriorityFeePerGas" in raw:
+            parameters.insert(0, U64(1))
+            parameters.insert(2, hex_to_u256(raw.get("maxPriorityFeePerGas")))
+            parameters.insert(3, hex_to_u256(raw.get("maxFeePerGas")))
+            parameters.insert(
+                8, self.json_to_access_list(raw.get("accessList"))
+            )
+            return b"\x02" + rlp.encode(
+                self._module("eth_types").FeeMarketTransaction(*parameters)
+            )
+
+        parameters.insert(1, hex_to_u256(raw.get("gasPrice")))
+        # Access List Transaction
+        if "accessList" in raw:
+            parameters.insert(0, U64(1))
+            parameters.insert(
+                7, self.json_to_access_list(raw.get("accessList"))
+            )
+            return b"\x01" + rlp.encode(
+                self._module("eth_types").AccessListTransaction(*parameters)
+            )
+
+        # Legacy Transaction
+        if hasattr(self._module("eth_types"), "LegacyTransaction"):
+            return self._module("eth_types").LegacyTransaction(*parameters)
+        else:
+            return self._module("eth_types").Transaction(*parameters)
+
+    def json_to_withdrawals(self, raw: Any) -> Any:
+        parameters = [
+            hex_to_u64(raw.get("index")),
+            hex_to_u64(raw.get("validatorIndex")),
+            self.hex_to_address(raw.get("address")),
+            hex_to_u256(raw.get("amount")),
+        ]
+
+        return self._module("eth_types").Withdrawal(*parameters)
 
     def json_to_blocks(
         self,
@@ -166,8 +306,8 @@ class Load(BaseLoad):
         block_rlps = []
 
         for json_block in json_blocks:
-            if "blockHeader" not in json_block and "rlp" in json_block:
-                # Some blocks are represented by only the RLP and not the block details
+            if "rlp" in json_block:
+                # Always decode from rlp
                 block_rlp = hex_to_bytes(json_block["rlp"])
                 block = rlp.decode_to(self.Block, block_rlp)
                 blocks.append(block)
@@ -184,13 +324,27 @@ class Load(BaseLoad):
                 for uncle in json_block["uncleHeaders"]
             )
 
-            blocks.append(
-                self.Block(
-                    header,
-                    transactions,
-                    uncles,
+            if "withdrawals" in json_block:
+                withdrawals = tuple(
+                    self.json_to_withdrawals(wd)
+                    for wd in json_block["withdrawals"]
                 )
-            )
+                blocks.append(
+                    self.Block(
+                        header,
+                        transactions,
+                        uncles,
+                        withdrawals,
+                    )
+                )
+            else:
+                blocks.append(
+                    self.Block(
+                        header,
+                        transactions,
+                        uncles,
+                    )
+                )
             block_header_hashes.append(
                 Hash32(hex_to_bytes(json_block["blockHeader"]["hash"]))
             )
@@ -199,7 +353,7 @@ class Load(BaseLoad):
         return blocks, block_header_hashes, block_rlps
 
     def json_to_header(self, raw: Any) -> Any:
-        return self.Header(
+        parameters = [
             hex_to_hash(raw.get("parentHash")),
             hex_to_hash(raw.get("uncleHash") or raw.get("sha3Uncles")),
             self.hex_to_address(raw.get("coinbase") or raw.get("miner")),
@@ -219,29 +373,51 @@ class Load(BaseLoad):
             hex_to_bytes(raw.get("extraData")),
             hex_to_bytes32(raw.get("mixHash")),
             hex_to_bytes8(raw.get("nonce")),
-        )
+        ]
+
+        if "baseFeePerGas" in raw:
+            base_fee_per_gas = hex_to_uint(raw.get("baseFeePerGas"))
+            parameters.append(base_fee_per_gas)
+
+        if "withdrawalsRoot" in raw:
+            withdrawals_root = self.hex_to_root(raw.get("withdrawalsRoot"))
+            parameters.append(withdrawals_root)
+
+        return self.Header(*parameters)
 
 
 def load_test(test_case: Dict, load: BaseLoad) -> Dict:
 
-    json_data = test_case["test_data"]
+    test_file = test_case["test_file"]
+    test_key = test_case["test_key"]
+
+    with open(test_file, "r") as fp:
+        data = json.load(fp)
+
+    json_data = data[test_key]
 
     blocks, block_header_hashes, block_rlps = load.json_to_blocks(
         json_data["blocks"]
     )
 
+    try:
+        raw_post_state = json_data["postState"]
+    except KeyError:
+        raise NoPostState
+    post_state = load.json_to_state(raw_post_state)
+
     return {
         "test_file": test_case["test_file"],
         "test_key": test_case["test_key"],
         "genesis_header": load.json_to_header(json_data["genesisBlockHeader"]),
-        "chain_id": Uint64(json_data["genesisBlockHeader"].get("chainId", 1)),
+        "chain_id": U64(json_data["genesisBlockHeader"].get("chainId", 1)),
         "genesis_header_hash": hex_to_bytes(
             json_data["genesisBlockHeader"]["hash"]
         ),
         "genesis_block_rlp": hex_to_bytes(json_data["genesisRLP"]),
         "last_block_hash": hex_to_bytes(json_data["lastblockhash"]),
         "pre_state": load.json_to_state(json_data["pre"]),
-        "expected_post_state": load.json_to_state(json_data["postState"]),
+        "expected_post_state": post_state,
         "blocks": blocks,
         "block_header_hashes": block_header_hashes,
         "block_rlps": block_rlps,
@@ -254,17 +430,25 @@ def run_blockchain_st_test(test_case: Dict, load: BaseLoad) -> None:
     test_data = load_test(test_case, load)
 
     genesis_header = test_data["genesis_header"]
-    genesis_block = load.Block(
-        genesis_header,
-        (),
-        (),
-    )
+    if hasattr(genesis_header, "withdrawals_root"):
+        genesis_block = load.Block(
+            genesis_header,
+            (),
+            (),
+            (),
+        )
+    else:
+        genesis_block = load.Block(
+            genesis_header,
+            (),
+            (),
+        )
 
-    assert rlp.rlp_hash(genesis_header) == test_data["genesis_header_hash"]
-    assert (
-        rlp.encode(cast(rlp.RLP, genesis_block))
-        == test_data["genesis_block_rlp"]
-    )
+        assert rlp.rlp_hash(genesis_header) == test_data["genesis_header_hash"]
+        assert (
+            rlp.encode(cast(rlp.RLP, genesis_block))
+            == test_data["genesis_block_rlp"]
+        )
 
     chain = load.BlockChain(
         blocks=[genesis_block],
@@ -272,7 +456,7 @@ def run_blockchain_st_test(test_case: Dict, load: BaseLoad) -> None:
         chain_id=test_data["chain_id"],
     )
 
-    if not test_data["ignore_pow_validation"]:
+    if not test_data["ignore_pow_validation"] or load.proof_of_stake:
         add_blocks_to_chain(chain, test_data, load)
     else:
         with patch(
@@ -315,21 +499,22 @@ def load_json_fixture(test_file: str, network: str) -> Generator:
     with open(test_file, "r") as fp:
         data = json.load(fp)
 
-        # Some newer test files have patterns like _d0g0v0_
-        # between test_name and network
-        keys_to_search = re.compile(
-            f"{re.escape(test_name)}.*{re.escape(network)}"
-        )
-        found_keys = list(filter(keys_to_search.match, data.keys()))
+        # Search tests by looking at the `network` attribute
+        found_keys = []
+        for key, test in data.items():
+            if "network" not in test:
+                continue
+
+            if test["network"] == network:
+                found_keys.append(key)
 
         if not any(found_keys):
-            raise KeyError
+            raise NoTestsFound
 
         for _key in found_keys:
             yield {
                 "test_file": test_file,
                 "test_key": _key,
-                "test_data": data[_key],
             }
 
 
@@ -388,13 +573,14 @@ def fetch_state_test_files(
                     yield pytest.param(_test_case, marks=pytest.mark.bigmem)
                 else:
                     yield _test_case
-        except KeyError:
+        except NoTestsFound:
             # file doesn't contain tests for the given fork
             continue
 
 
 # Test case Identifier
 def idfn(test_case: Dict) -> str:
-    folder_name = test_case["test_file"].split("/")[-2]
-    # Assign Folder name and test_key to identify tests in output
-    return folder_name + " - " + test_case["test_key"]
+    if isinstance(test_case, dict):
+        folder_name = test_case["test_file"].split("/")[-2]
+        # Assign Folder name and test_key to identify tests in output
+        return folder_name + " - " + test_case["test_key"]

@@ -6,47 +6,46 @@
 :orphan:
 
 {% endif %}
-:mod:`{{ obj.name }}`
-======={{ "=" * obj.name|length }}
-
 .. py:module:: {{ obj.name }}
 
 {% if obj.docstring %}
 {{ obj.docstring|prepare_docstring }}
 {% endif %}
 
-{% block subpackages %}
-{% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
-{% if visible_subpackages %}
-Subpackages
------------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 3
+.. only:: stage1
 
-{% for subpackage in visible_subpackages %}
-   {{ subpackage.short_name }}/index.rst
-{% endfor %}
+   {% block subpackages %}
+   {% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
+   {% if visible_subpackages %}
+   Subpackages
+   -----------
+   .. toctree::
+      :titlesonly:
+      :maxdepth: 3
 
-
-{% endif %}
-{% endblock %}
-{% block submodules %}
-{% set visible_submodules = obj.submodules|selectattr("display")|list %}
-{% if visible_submodules %}
-Submodules
-----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-{% for submodule in visible_submodules %}
-   {{ submodule.short_name }}/index.rst
-{% endfor %}
+   {% for subpackage in visible_subpackages %}
+      {{ subpackage.short_name }}/index.rst
+   {% endfor %}
 
 
-{% endif %}
-{% endblock %}
+   {% endif %}
+   {% endblock %}
+   {% block submodules %}
+   {% set visible_submodules = obj.submodules|selectattr("display")|list %}
+   {% if visible_submodules %}
+   Submodules
+   ----------
+   .. toctree::
+      :titlesonly:
+      :maxdepth: 1
+
+   {% for submodule in visible_submodules %}
+      {{ submodule.short_name }}/index.rst
+   {% endfor %}
+
+
+   {% endif %}
+   {% endblock %}
 {% block content %}
 {% if obj.all is not none %}
 {% set visible_children = obj.children|selectattr("short_name", "in", obj.all)|list %}
@@ -102,7 +101,9 @@ Attributes
 .. autoapisummary::
 
 {% for attribute in visible_attributes %}
-   {{ attribute.id }}
+{%+ if attribute.docstring != "autoapi_noindex" -%}
+{{ attribute.id|indent(3, True) }}
+{% endif %}
 {% endfor %}
 
 

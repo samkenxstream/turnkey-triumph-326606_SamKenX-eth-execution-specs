@@ -17,7 +17,8 @@ from ethereum.crypto.hash import Hash32, keccak256
 from ethereum.utils.byte import left_pad_zero_bytes
 
 from ...vm import Evm
-from ...vm.gas import GAS_ECRECOVER, subtract_gas
+from ...vm.gas import GAS_ECRECOVER, charge_gas
+from ...vm.memory import buffer_read
 
 
 def ecrecover(evm: Evm) -> None:
@@ -30,16 +31,17 @@ def ecrecover(evm: Evm) -> None:
     evm :
         The current EVM frame.
     """
-    evm.gas_left = subtract_gas(evm.gas_left, GAS_ECRECOVER)
     data = evm.message.data
-    message_hash_bytes = left_pad_zero_bytes(data[:32], 32)
+
+    # GAS
+    charge_gas(evm, GAS_ECRECOVER)
+
+    # OPERATION
+    message_hash_bytes = buffer_read(data, U256(0), U256(32))
     message_hash = Hash32(message_hash_bytes)
-    v_bytes = left_pad_zero_bytes(data[32:64], 32)
-    v = U256.from_be_bytes(v_bytes)
-    r_bytes = left_pad_zero_bytes(data[64:96], 32)
-    r = U256.from_be_bytes(r_bytes)
-    s_bytes = left_pad_zero_bytes(data[96:128], 32)
-    s = U256.from_be_bytes(s_bytes)
+    v = U256.from_be_bytes(buffer_read(data, U256(32), U256(32)))
+    r = U256.from_be_bytes(buffer_read(data, U256(64), U256(32)))
+    s = U256.from_be_bytes(buffer_read(data, U256(96), U256(32)))
 
     if v != 27 and v != 28:
         return

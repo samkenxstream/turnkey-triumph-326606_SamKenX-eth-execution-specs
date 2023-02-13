@@ -10,8 +10,7 @@ from sphinx.application import Sphinx
 from sphinx.domains import Index, IndexEntry
 
 import ethereum
-
-from .forks import Hardfork
+from ethereum_spec_tools.forks import Hardfork
 
 BASE_FORKS = "autoapi/ethereum"
 
@@ -125,7 +124,9 @@ class HardforkIndex(Index):
                     )
                 )
 
-        entries = sorted(content.items(), key=lambda i: i[0].block)
+        entries = sorted(
+            content.items(), key=lambda i: (i[0].block is None, i[0].block)
+        )
 
         result = []
 

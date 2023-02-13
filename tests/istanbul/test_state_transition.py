@@ -3,9 +3,13 @@ from typing import Dict
 
 import pytest
 
+from ethereum import rlp
+from ethereum.base_types import U256, Bytes, Bytes8, Bytes32, Uint
+from ethereum.crypto.hash import Hash32
 from ethereum.exceptions import InvalidBlock
 from tests.helpers.load_state_tests import (
     Load,
+    NoPostState,
     fetch_state_test_files,
     idfn,
     run_blockchain_st_test,
@@ -24,7 +28,7 @@ test_dir = "tests/fixtures/BlockchainTests/GeneralStateTests/"
 
 # Every test below takes more than  60s to run and
 # hence they've been marked as slow
-SLOW_TESTS = (
+GENERAL_STATE_SLOW_TESTS = (
     "stTimeConsuming/CALLBlake2f_MaxRounds.json",
     "stTimeConsuming/static_Call50000_sha256.json",
     "vmPerformance/loopExp.json",
@@ -49,18 +53,14 @@ INCORRECT_UPSTREAM_STATE_TESTS = (
     "stSStoreTest/InitCollision.json",
 )
 
-BIG_MEMORY_TESTS = (
-    "static_Return50000_2_d0g0v0_Istanbul",
-    "static_Call50000_d1g0v0_Istanbul",
-    "static_Call50000_identity2_d0g0v0_Istanbul",
-    "static_Call50000_identity2_d1g0v0_Istanbul",
-    "static_Call50000_ecrec_d1g0v0_Istanbul",
-    "static_Call50000_d0g0v0_Istanbul",
-    "Return50000_d0g1v0_Istanbul",
-    "Return50000_2_d0g1v0_Istanbul",
-    "static_Call50000_rip160_d1g0v0_Istanbul",
-    "static_Call50000_rip160_d0g0v0_Istanbul",
-    "static_Call50000_ecrec_d0g0v0_Istanbul",
+# All tests that recursively create a large number of frames (50000)
+GENERAL_STATE_BIG_MEMORY_TESTS = (
+    "50000_",
+    "/stQuadraticComplexityTest/",
+    "/stRandom2/",
+    "/stRandom/",
+    "/stSpecialTest/",
+    "stTimeConsuming/",
 )
 
 
@@ -69,15 +69,15 @@ BIG_MEMORY_TESTS = (
     fetch_istanbul_tests(
         test_dir,
         ignore_list=INCORRECT_UPSTREAM_STATE_TESTS,
-        slow_list=SLOW_TESTS,
-        big_memory_list=BIG_MEMORY_TESTS,
+        slow_list=GENERAL_STATE_SLOW_TESTS,
+        big_memory_list=GENERAL_STATE_BIG_MEMORY_TESTS,
     ),
     ids=idfn,
 )
 def test_general_state_tests(test_case: Dict) -> None:
     try:
         run_istanbul_blockchain_st_tests(test_case)
-    except KeyError:
+    except NoPostState:
         # FIXME: Handle tests that don't have post state
         pytest.xfail(f"{test_case} doesn't have post state")
 
@@ -85,27 +85,33 @@ def test_general_state_tests(test_case: Dict) -> None:
 # Run legacy valid block tests
 test_dir = "tests/fixtures/BlockchainTests/ValidBlocks/"
 
-only_in = (
-    "bcUncleTest/oneUncle.json",
-    "bcUncleTest/oneUncleGeneration2.json",
-    "bcUncleTest/oneUncleGeneration3.json",
-    "bcUncleTest/oneUncleGeneration4.json",
-    "bcUncleTest/oneUncleGeneration5.json",
-    "bcUncleTest/oneUncleGeneration6.json",
-    "bcUncleTest/twoUncle.json",
-    "bcUncleTest/uncleHeaderAtBlock2.json",
-    "bcUncleSpecialTests/uncleBloomNot0.json",
-    "bcUncleSpecialTests/futureUncleTimestampDifficultyDrop.json",
+IGNORE_LIST = (
+    "bcForkStressTest/ForkStressTest.json",
+    "bcGasPricerTest/RPC_API_Test.json",
+    "bcMultiChainTest",
+    "bcTotalDifficultyTest",
 )
+
+# Every test below takes more than  60s to run and
+# hence they've been marked as slow
+VALID_BLOCKS_SLOW_TESTS = ("bcExploitTest/DelegateCallSpam.json",)
 
 
 @pytest.mark.parametrize(
     "test_case",
-    fetch_istanbul_tests(test_dir, only_in=only_in),
+    fetch_istanbul_tests(
+        test_dir,
+        ignore_list=IGNORE_LIST,
+        slow_list=VALID_BLOCKS_SLOW_TESTS,
+    ),
     ids=idfn,
 )
-def test_uncles_correctness(test_case: Dict) -> None:
-    run_istanbul_blockchain_st_tests(test_case)
+def test_valid_block_tests(test_case: Dict) -> None:
+    try:
+        run_istanbul_blockchain_st_tests(test_case)
+    except NoPostState:
+        # FIXME: Handle tests that don't have post state
+        pytest.xfail(f"{test_case} doesn't have post state")
 
 
 # Run legacy invalid block tests
@@ -124,6 +130,9 @@ xfail_candidates = (
     ("bcInvalidHeaderTest", "GasLimitHigherThan2p63m1_Istanbul"),
 )
 
+# FIXME: Check if these tests should in fact be ignored
+IGNORE_INVALID_BLOCK_TESTS = ("bcForgedTest",)
+
 
 def is_in_xfail(test_case: Dict) -> bool:
     for dir, test_key in xfail_candidates:
@@ -135,7 +144,10 @@ def is_in_xfail(test_case: Dict) -> bool:
 
 @pytest.mark.parametrize(
     "test_case",
-    fetch_istanbul_tests(test_dir),
+    fetch_istanbul_tests(
+        test_dir,
+        ignore_list=IGNORE_INVALID_BLOCK_TESTS,
+    ),
     ids=idfn,
 )
 def test_invalid_block_tests(test_case: Dict) -> None:
@@ -149,8 +161,95 @@ def test_invalid_block_tests(test_case: Dict) -> None:
         else:
             with pytest.raises(InvalidBlock):
                 run_istanbul_blockchain_st_tests(test_case)
-    except KeyError:
+    except NoPostState:
         # FIXME: Handle tests that don't have post state
         pytest.xfail(
             "{} doesn't have post state".format(test_case["test_key"])
         )
+
+
+def test_transaction_with_insufficient_balance_for_value() -> None:
+    genesis_header = FIXTURES_LOADER.Header(
+        parent_hash=Hash32([0] * 32),
+        ommers_hash=Hash32.fromhex(
+            "1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+        ),
+        coinbase=FIXTURES_LOADER.hex_to_address(
+            "8888f1f195afa192cfee860698584c030f4c9db1"
+        ),
+        state_root=FIXTURES_LOADER.hex_to_root(
+            "d84598d90e2a72125c111171717f5508fd40ed0d0cd067ceb4e734d4da3a810a"
+        ),
+        transactions_root=FIXTURES_LOADER.hex_to_root(
+            "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+        ),
+        receipt_root=FIXTURES_LOADER.hex_to_root(
+            "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+        ),
+        bloom=FIXTURES_LOADER.Bloom([0] * 256),
+        difficulty=Uint(0x020000),
+        number=Uint(0x00),
+        gas_limit=Uint(0x2FEFD8),
+        gas_used=Uint(0x00),
+        timestamp=U256(0x54C98C81),
+        extra_data=Bytes([0x42]),
+        mix_digest=Bytes32([0] * 32),
+        nonce=Bytes8([0] * 8),
+    )
+
+    genesis_header_hash = bytes.fromhex(
+        "0b22b0d49035cb4f8a969d584f36126e0ac6996b9db7264ac5a192b8698177eb"
+    )
+
+    assert rlp.rlp_hash(genesis_header) == genesis_header_hash
+
+    genesis_block = FIXTURES_LOADER.Block(
+        genesis_header,
+        (),
+        (),
+    )
+
+    state = FIXTURES_LOADER.State()
+
+    address = FIXTURES_LOADER.hex_to_address(
+        "a94f5374fce5edbc8e2a8697c15331677e6ebf0b"
+    )
+
+    account = FIXTURES_LOADER.Account(
+        nonce=Uint(0),
+        balance=U256(0x056BC75E2D63100000),
+        code=Bytes(),
+    )
+
+    FIXTURES_LOADER.set_account(state, address, account)
+
+    tx = FIXTURES_LOADER.LegacyTransaction(
+        nonce=U256(0x00),
+        gas_price=U256(1000),
+        gas=U256(150000),
+        to=FIXTURES_LOADER.hex_to_address(
+            "c94f5374fce5edbc8e2a8697c15331677e6ebf0b"
+        ),
+        value=U256(1000000000000000000000),
+        data=Bytes(),
+        v=U256(0),
+        r=U256(0),
+        s=U256(0),
+    )
+
+    env = FIXTURES_LOADER.Environment(
+        caller=address,
+        origin=address,
+        block_hashes=[genesis_header_hash],
+        coinbase=genesis_block.header.coinbase,
+        number=genesis_block.header.number + 1,
+        gas_limit=genesis_block.header.gas_limit,
+        gas_price=tx.gas_price,
+        time=genesis_block.header.timestamp,
+        difficulty=genesis_block.header.difficulty,
+        state=state,
+        chain_id=Uint(1),
+    )
+
+    with pytest.raises(InvalidBlock):
+        FIXTURES_LOADER.process_transaction(env, tx)

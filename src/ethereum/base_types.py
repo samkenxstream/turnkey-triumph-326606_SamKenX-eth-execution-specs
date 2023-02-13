@@ -15,12 +15,12 @@ Integer and array types which are used by—but not unique to—Ethereum.
 from __future__ import annotations
 
 from dataclasses import replace
-from typing import Any, Callable, Optional, Tuple, Type, TypeVar
+from typing import Any, Callable, ClassVar, Optional, Tuple, Type, TypeVar
 
 U8_MAX_VALUE = (2**8) - 1
-UINT32_MAX_VALUE = (2**32) - 1
-UINT32_CEIL_VALUE = 2**32
-UINT64_MAX_VALUE = (2**64) - 1
+U32_MAX_VALUE = (2**32) - 1
+U32_CEIL_VALUE = 2**32
+U64_MAX_VALUE = (2**64) - 1
 U255_MAX_VALUE = (2**255) - 1
 U255_CEIL_VALUE = 2**255
 U256_MAX_VALUE = (2**256) - 1
@@ -299,7 +299,7 @@ class FixedUInt(int):
     directly, but rather to be subclassed.
     """
 
-    MAX_VALUE: "FixedUInt"
+    MAX_VALUE: ClassVar["FixedUInt"]
 
     __slots__ = ()
 
@@ -649,6 +649,8 @@ class U256(FixedUInt):
     inclusive.
     """
 
+    MAX_VALUE: ClassVar["U256"]
+
     __slots__ = ()
 
     @classmethod
@@ -729,20 +731,21 @@ class U256(FixedUInt):
 
 
 U256.MAX_VALUE = int.__new__(U256, U256_MAX_VALUE)
+"""autoapi_noindex"""
 
 
-class Uint32(FixedUInt):
+class U32(FixedUInt):
     """
     Unsigned positive integer, which can represent `0` to `2 ** 32 - 1`,
     inclusive.
     """
 
-    MAX_VALUE: "Uint32"
+    MAX_VALUE: ClassVar["U32"]
 
     __slots__ = ()
 
     @classmethod
-    def from_le_bytes(cls: Type, buffer: "Bytes") -> "Uint32":
+    def from_le_bytes(cls: Type, buffer: "Bytes") -> "U32":
         """
         Converts a sequence of bytes into an arbitrarily sized unsigned integer
         from its little endian representation.
@@ -779,21 +782,22 @@ class Uint32(FixedUInt):
         return self.to_bytes(byte_length, "little")
 
 
-Uint32.MAX_VALUE = int.__new__(Uint32, UINT32_MAX_VALUE)
+U32.MAX_VALUE = int.__new__(U32, U32_MAX_VALUE)
+"""autoapi_noindex"""
 
 
-class Uint64(FixedUInt):
+class U64(FixedUInt):
     """
     Unsigned positive integer, which can represent `0` to `2 ** 64 - 1`,
     inclusive.
     """
 
-    MAX_VALUE: "Uint64"
+    MAX_VALUE: ClassVar["U64"]
 
     __slots__ = ()
 
     @classmethod
-    def from_le_bytes(cls: Type, buffer: "Bytes") -> "Uint64":
+    def from_le_bytes(cls: Type, buffer: "Bytes") -> "U64":
         """
         Converts a sequence of bytes into an arbitrarily sized unsigned integer
         from its little endian representation.
@@ -829,8 +833,43 @@ class Uint64(FixedUInt):
         byte_length = (bit_length + 7) // 8
         return self.to_bytes(byte_length, "little")
 
+    def to_be_bytes(self) -> "Bytes":
+        """
+        Converts this unsigned 64 bit integer into its big endian
+        representation.
 
-Uint64.MAX_VALUE = int.__new__(Uint64, UINT64_MAX_VALUE)
+        Returns
+        -------
+        big_endian : `Bytes`
+            Big endian (most significant bits first) representation.
+        """
+        bit_length = self.bit_length()
+        byte_length = (bit_length + 7) // 8
+        return self.to_bytes(byte_length, "big")
+
+    @classmethod
+    def from_be_bytes(cls: Type, buffer: "Bytes") -> "U64":
+        """
+        Converts a sequence of bytes into an unsigned 64 bit integer from its
+        big endian representation.
+
+        Parameters
+        ----------
+        buffer :
+            Bytes to decode.
+        Returns
+        -------
+        self : `U64`
+            Unsigned integer decoded from `buffer`.
+        """
+        if len(buffer) > 8:
+            raise ValueError()
+
+        return cls(int.from_bytes(buffer, "big"))
+
+
+U64.MAX_VALUE = int.__new__(U64, U64_MAX_VALUE)
+"""autoapi_noindex"""
 
 
 B = TypeVar("B", bound="FixedBytes")

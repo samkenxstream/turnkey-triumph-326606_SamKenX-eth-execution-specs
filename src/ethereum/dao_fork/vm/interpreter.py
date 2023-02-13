@@ -23,22 +23,16 @@ from ..state import (
     account_has_code_or_nonce,
     begin_transaction,
     commit_transaction,
-    get_account,
     move_ether,
     rollback_transaction,
     set_code,
     touch_account,
 )
 from ..vm import Message
-from ..vm.gas import GAS_CODE_DEPOSIT, REFUND_SELF_DESTRUCT, subtract_gas
+from ..vm.gas import GAS_CODE_DEPOSIT, REFUND_SELF_DESTRUCT, charge_gas
 from ..vm.precompiled_contracts.mapping import PRE_COMPILED_CONTRACTS
 from . import Environment, Evm
-from .exceptions import (
-    ExceptionalHalt,
-    InsufficientFunds,
-    InvalidOpcode,
-    StackDepthLimitError,
-)
+from .exceptions import ExceptionalHalt, InvalidOpcode, StackDepthLimitError
 from .instructions import Ops, op_implementation
 from .runtime import get_valid_jump_destinations
 
@@ -136,7 +130,7 @@ def process_create_message(message: Message, env: Environment) -> Evm:
         contract_code = evm.output
         contract_code_gas = len(contract_code) * GAS_CODE_DEPOSIT
         try:
-            evm.gas_left = subtract_gas(evm.gas_left, contract_code_gas)
+            charge_gas(evm, contract_code_gas)
         except ExceptionalHalt:
             rollback_transaction(env.state)
             evm.gas_left = U256(0)
@@ -173,14 +167,7 @@ def process_message(message: Message, env: Environment) -> Evm:
 
     touch_account(env.state, message.current_target)
 
-    sender_balance = get_account(env.state, message.caller).balance
-
     if message.should_transfer_value and message.value != 0:
-        if sender_balance < message.value:
-            rollback_transaction(env.state)
-            raise InsufficientFunds(
-                f"Insufficient funds: {sender_balance} < {message.value}"
-            )
         move_ether(
             env.state, message.caller, message.current_target, message.value
         )
